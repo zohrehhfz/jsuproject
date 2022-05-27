@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('travel_user', function (Blueprint $table) {
-            $table->string("role",1);
+            $table->string("role",1)->after("travel_id");
         });
     }
 
