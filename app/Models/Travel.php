@@ -19,5 +19,8 @@ class Travel extends Model
 		'cancel',
     ];
 	
-	
+	public function users()
+	{
+		return $this->belongsToMany('App\Models\User');
+	}	
 }
