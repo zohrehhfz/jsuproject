@@ -59,10 +59,17 @@
 					<div>
 					@foreach ($trvls as $t)
 					<p> {{$t->destination}} </p>
+					
+					<?php
+							$date = date('Y-m-d', strtotime($t->registerationend)); 
+							$currentdate = date('Y-m-d');
+							echo $currentdate;
+					?>
 					@endforeach
 					</div>
 					<br>
 					<br>
+					
                     <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
                         Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
                     </div>
