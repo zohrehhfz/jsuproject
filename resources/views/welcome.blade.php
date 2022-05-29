@@ -62,8 +62,12 @@
 					
 					<?php
 							$date = date('Y-m-d', strtotime($t->registerationend)); 
-							$currentdate = date('Y-m-d');
-							echo $currentdate;
+							$currentyear = date("Y");
+							$currentmonth = date("m");
+							$currentday = date("d");
+							echo $currentyear;
+							echo $currentmonth;
+							echo $currentday;
 					?>
 					@endforeach
 					</div>
