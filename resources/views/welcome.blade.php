@@ -58,16 +58,27 @@
 				
 					<div>
 					@foreach ($trvls as $t)
-					<p> {{$t->destination}} </p>
 					
 					<?php
-							$date = date('Y-m-d', strtotime($t->registerationend)); 
+							$time = strtotime($t->registerationend);
+							$day = date('d',$time);
+							$month = date('m',$time);
+							$year = date('Y',$time);
+							
 							$currentyear = date("Y");
 							$currentmonth = date("m");
 							$currentday = date("d");
-							echo $currentyear;
-							echo $currentmonth;
-							echo $currentday;
+						if($currentyear <= $year)
+						{
+							
+							if (($currentmonth < $month))
+							{
+							}
+							else if(($currentmonth == $month) && ($currentday <= $day))
+							{
+							}
+						}							
+							
 					?>
 					@endforeach
 					</div>
