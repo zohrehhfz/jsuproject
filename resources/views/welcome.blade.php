@@ -73,14 +73,7 @@
 							
 							if ((($currentmonth == $month) && ($currentday <= $day)) || ($currentmonth < $month))
 							{
-								/*echo "<a href=\"{{route::('ShowTravel',[$travel])}}">destination: ".$travel->destination </a>";
-								echo "traveltime".$travel->traveltime;
-								echo "registerationstart".$travel->registerationstart;
-								echo "registerationend".$travel->registerationend;
-								if($travel->description != "")
-								echo "description".$travel->description;
-								echo '<br>';
-								echo '<br>';*/
+								
 						?>
 								
 								<a href="{{route('ShowTravel',[$travel])}}"> destination: {{$travel->destination}}</a>
