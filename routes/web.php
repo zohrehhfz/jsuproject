@@ -15,9 +15,11 @@ use App\Http\Controllers\TravelController;
 */
 
 Route::get('/', function () {
-	$trvls = Travel::all();
-    return view('welcome',['trvls'=>$trvls]);
+	$travels = Travel::all();
+    return view('welcome',['travels'=>$travels]);
 });
+
+Route::get('/travels/show/{travel}' ,[TravelController::class,'show'])->name('ShowTravel');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

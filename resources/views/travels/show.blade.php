@@ -57,43 +57,13 @@
             </div> -->
 				
 					<div>
-					@foreach ($travels as $travel)
-					
-					<?php
-							$time = strtotime($travel->registerationend);
-							$day = date('d',$time);
-							$month = date('m',$time);
-							$year = date('Y',$time);
-							
-							$currentyear = date("Y");
-							$currentmonth = date("m");
-							$currentday = date("d");
-						if($currentyear <= $year)
-						{
-							
-							if ((($currentmonth == $month) && ($currentday <= $day)) || ($currentmonth < $month))
-							{
-								/*echo "<a href=\"{{route::('ShowTravel',[$travel])}}">destination: ".$travel->destination </a>";
-								echo "traveltime".$travel->traveltime;
-								echo "registerationstart".$travel->registerationstart;
-								echo "registerationend".$travel->registerationend;
-								if($travel->description != "")
-								echo "description".$travel->description;
-								echo '<br>';
-								echo '<br>';*/
-						?>
-								
-								<a href="{{route('ShowTravel',[$travel])}}"> destination: {{$travel->destination}}</a>
+					<p> destination: {{$travel->destination}}</p>
 								<p> traveltime {{$travel->traveltime}}</p>
 								<p> registerationstart {{$travel->registerationstart}}</p>
 								<p> registerationend : {{$travel->registerationend}}</p>
 								<p> description {{$travel->description}}</p>
-						<?php
-							}
-						}							
-							
-					?>
-					@endforeach
+								<br>
+								<br>
 					</div>
 					<br>
 					<br>
