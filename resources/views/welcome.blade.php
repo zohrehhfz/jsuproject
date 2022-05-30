@@ -73,7 +73,14 @@
 							
 							if ((($currentmonth == $month) && ($currentday <= $day)) || ($currentmonth < $month))
 							{
-								echo $t->destination;
+								echo "destination: ".$t->destination;
+								echo "traveltime".$t->traveltime;
+								echo "registerationstart".$t->registerationstart;
+								echo "registerationend".$t->registerationend;
+								if($t->description != "")
+								echo "description".$t->description;
+								echo '<br>';
+								echo '<br>';
 							}
 						}							
 							
