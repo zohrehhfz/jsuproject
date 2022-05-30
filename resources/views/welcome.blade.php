@@ -71,11 +71,9 @@
 						if($currentyear <= $year)
 						{
 							
-							if (($currentmonth < $month))
+							if ((($currentmonth == $month) && ($currentday <= $day)) || ($currentmonth < $month))
 							{
-							}
-							else if(($currentmonth == $month) && ($currentday <= $day))
-							{
+								echo $t->destination;
 							}
 						}							
 							
