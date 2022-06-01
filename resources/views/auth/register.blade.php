@@ -25,6 +25,19 @@
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
+			
+			<!-- phone -->
+            <div class="mt-4">
+                <x-label for="phone" :value="__('Phone')" />
+
+                <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required />
+            </div>
+			<!-- year of birth -->
+            <div class="mt-4">
+                <x-label for="birthdate" :value="__('year of birthdate')" />
+
+                <x-input id="birthdate" class="block mt-1 w-full" type="text" name="birthdate" :value="old('birthdate')" required />
+            </div>
 
             <!-- Password -->
             <div class="mt-4">
