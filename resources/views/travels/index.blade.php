@@ -60,7 +60,7 @@
 								
 						?>
 								
-								<a href="{{route('ShowTravel',[$travel])}}" class="button">Link Button</a>
+								<a href="{{route('ShowTravel',[$travel])}}" class="button">Travel Registration </a>
 								<br>
 								<br>
 								<hr>
