@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Travel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TravelController extends Controller
 {
@@ -14,7 +15,7 @@ class TravelController extends Controller
      */
     public function index()
     {
-        $travels = Travel::all();
+        $travels = Travel::orderBy('registerationend','DESC')->get();
     return view('travels.index',['travels'=>$travels]);
     }
 
