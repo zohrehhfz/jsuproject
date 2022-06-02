@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/travels/show/{travel}' ,[TravelController::class,'show'])->name('ShowTravel');
+Route::get('/travels/index' ,[TravelController::class,'index'])->name('IndexTravel');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

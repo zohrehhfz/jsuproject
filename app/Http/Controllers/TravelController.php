@@ -14,7 +14,8 @@ class TravelController extends Controller
      */
     public function index()
     {
-        //
+        $travels = Travel::all();
+    return view('travels.index',['travels'=>$travels]);
     }
 
     /**
@@ -47,7 +48,6 @@ class TravelController extends Controller
     public function show(Travel $travel)
     {
         return view('travels.show',['travel'=>$travel]);
-		
     }
 
     /**
