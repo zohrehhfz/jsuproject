@@ -78,7 +78,7 @@
 								
 						?>
 								
-								<a href="{{route('ShowTravel',[$travel])}}"> destination: {{$travel->destination}}</a>
+								<a href="{{route('ShowTravel',[$travel])}}"> مقصد: {{$travel->destination}}</a>
 								<p> traveltime {{$travel->traveltime}}</p>
 								<p> registerationstart {{$travel->registerationstart}}</p>
 								<p> registerationend : {{$travel->registerationend}}</p>

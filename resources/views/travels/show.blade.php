@@ -57,7 +57,7 @@
             </div> -->
 				
 					<div>
-					<p> destination: {{$travel->destination}}</p>
+					<p> مقصد: {{$travel->destination}}</p>
 								<p> traveltime {{$travel->traveltime}}</p>
 								<p> registerationstart {{$travel->registerationstart}}</p>
 								<p> registerationend : {{$travel->registerationend}}</p>
