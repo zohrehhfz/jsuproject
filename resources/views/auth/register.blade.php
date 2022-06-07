@@ -9,18 +9,19 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('register') }}" dir="rtl">
+        <form method="POST" action="{{ route('register') }}" dir="rtl" enctype="multipart/form-data">
             @csrf
+			
 			<div class="col-lg-2 col-md-2 mt-3 "> آپلود عکس شما : </div>
-			<div class="col-lg-3 col-md-3  mt-3"> <input class="form-control" type="file" name="photo" id="photo"> </div>
-
+			<div class="col-lg-3 col-md-3  mt-3"> <input type="file" name="photo" id="photo"> </div>
+			
             <!-- Name -->
             <div>
                 <x-label for="name" :value="__('نام')" />
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
             </div>
-
+			
             <!-- Email Address -->
             <div class="mt-4">
                 <x-label for="email" :value="__('ایمیل')" />
