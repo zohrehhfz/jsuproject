@@ -54,6 +54,10 @@ class RegisteredUserController extends Controller
 		if($request->role == "leader")
 		{
 			$number = 0;
+			Role::create([
+			'user_id' => $user->id,
+			'role' => "user"
+		]);
 		}
 		
 		Role::create([
