@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
@@ -40,14 +40,28 @@ class RegisteredUserController extends Controller
 			'phone' => ['required', 'string','min:11' ,'max:13'],
 			'birthdate' => ['required', 'string', 'max:5'],
 			'role' => 'required' ,
+			'photo' => 'mimes:jpg,bmp,png|max:2048'
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+		$photofile = $request->file('photo');
+		$photofilename = $photofile->getClientOriginalName();
+		$extension = $photofile->extension();
+		$newphotofilename = sha1(time().'_'.rand(1000000000,1999999999).'_'.rand(1000000000,1999999999).'_'.$photofilename);
+		$newphotofilename = $newphotofilename.'.'.$extension;
+
+		Storage::disk('local')->putFileAs(
+			'public/files',
+			$photofile,
+			$newphotofilename
+		);
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
 			'phone' => $request->phone,
             'birthdate' => $request->birthdate,
+			'photoname' => $newphotofilename ,
+			'orginalphotoname' => $photofilename ,
             'password' => Hash::make($request->password),
         ]);
 		$number = 1;
