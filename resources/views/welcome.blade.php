@@ -20,7 +20,7 @@
             }
         </style>
     </head>
-    <body class="antialiased">
+    <body class="antialiased" dir="rtl">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
@@ -79,10 +79,10 @@
 						?>
 								
 								<a href="{{route('ShowTravel',[$travel])}}"> مقصد: {{$travel->destination}}</a>
-								<p> traveltime {{$travel->traveltime}}</p>
-								<p> registerationstart {{$travel->registerationstart}}</p>
-								<p> registerationend : {{$travel->registerationend}}</p>
-								<p> description {{$travel->description}}</p>
+								<p>زمان سفر : {{$travel->traveltime}}</p>
+								<p> شروع ثبت نام : {{$travel->registerationstart}}</p>
+								<p> پایان ثبت نام : {{$travel->registerationend}}</p>
+								<p> توضیحات سفر : {{$travel->description}}</p>
 						<?php
 							}
 						}							
