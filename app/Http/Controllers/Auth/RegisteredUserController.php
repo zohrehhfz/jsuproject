@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Role;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -38,6 +39,7 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
 			'phone' => ['required', 'string','min:11' ,'max:13'],
 			'birthdate' => ['required', 'string', 'max:5'],
+			'role' => 'required' ,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -48,7 +50,17 @@ class RegisteredUserController extends Controller
             'birthdate' => $request->birthdate,
             'password' => Hash::make($request->password),
         ]);
-
+		$number = 1;
+		if($request->role == "leader")
+		{
+			$number = 0;
+		}
+		
+		Role::create([
+			'user_id' => $user->id,
+			'role' => $request->role ,
+			'active' => $number
+		]);
         event(new Registered($user));
 
         Auth::login($user);
