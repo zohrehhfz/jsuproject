@@ -11,7 +11,7 @@
 
         <form method="POST" action="{{ route('register') }}" dir="rtl">
             @csrf
-			<div class="col-lg-2 col-md-2 mt-3 "> :آپلود عکس شما  </div>
+			<div class="col-lg-2 col-md-2 mt-3 "> آپلود عکس شما : </div>
 			<div class="col-lg-3 col-md-3  mt-3"> <input class="form-control" type="file" name="photo" id="photo"> </div>
 
             <!-- Name -->
