@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\Role;
+use App\Models\User;
 
 class EnsureItIsAdmin
 {
@@ -16,6 +18,15 @@ class EnsureItIsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
+		$u = auth()->user();
+		$a = $u->roles->where('role','Admin')->pluck('role');
+		error_log($request);
+		
+		if($a[0] != "Admin")
+		{
+			abort(403, 'Access denied');
+		}		
+		
         return $next($request);
     }
 }
