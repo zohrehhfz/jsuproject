@@ -40,7 +40,7 @@ class RegisteredUserController extends Controller
 			'phone' => ['required', 'string','min:11' ,'max:13'],
 			'birthdate' => ['required', 'string', 'max:5'],
 			'role' => 'required' ,
-			'photo' => ['mimes:jpg,png,jpeg,gif,svg','max:2048'] ,
+			'photo' => ['required','mimes:jpg,png,jpeg,gif,svg','max:2048'] ,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
