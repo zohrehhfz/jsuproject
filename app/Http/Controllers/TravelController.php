@@ -16,7 +16,8 @@ class TravelController extends Controller
 	 public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('admin')->only('index');
+        $this->middleware('admin');
+		$this->middleware('leader')->only('index');
     }
 	
     public function index()

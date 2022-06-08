@@ -16,6 +16,13 @@ class EnsureItIsLeader
      */
     public function handle(Request $request, Closure $next)
     {
+		$u = auth()->user();
+		$a = $u->roles->where('role','leader')->count();
+		
+		if($a != 1)
+		{
+			abort(403, 'Access denied');
+		}	
         return $next($request);
     }
 }
