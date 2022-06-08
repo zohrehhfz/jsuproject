@@ -19,10 +19,9 @@ class EnsureItIsAdmin
     public function handle(Request $request, Closure $next)
     {
 		$u = auth()->user();
-		$a = $u->roles->where('role','Admin')->pluck('role');
-		error_log($request);
+		$a = $u->roles->where('role','Admin')->count();
 		
-		if($a[0] != "Admin")
+		if($a != 1)
 		{
 			abort(403, 'Access denied');
 		}		
