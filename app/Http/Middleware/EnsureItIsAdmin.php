@@ -25,7 +25,6 @@ class EnsureItIsAdmin
 		{
 			abort(403, 'Access denied');
 		}		
-		
         return $next($request);
     }
 }
