@@ -9,7 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200" dir=rtl>
-					
+					@if($user->roles->where("role",'leader')->count() == "1")
+						@if($user->roles->first()->active == true)
+							<p>وضعیت : فعال </p>
+						@else
+						<p> وضعیت : غیر فعال</p>
+					@endif
+					@endif
 					<p>نام :
 					{{$user->name}}
 						</p>
@@ -26,7 +32,7 @@
 						{{$user->created_at}}
 						 ایجاد شده است </p>
                 </div>
-				
+				@if($user->travels->count() != 0)
 				<div class="p-6 bg-white border-b border-gray-200" dir=rtl>
 					<p>سفرهای شما :</p>
 					@foreach ($user->travels as $travel)
@@ -36,11 +42,8 @@
 								<p> پایان ثبت نام : {{$travel->registerationend}}</p>
 								<p> توضیحات سفر : {{$travel->description}}</p>
 					@endforeach
-					<br>
-					<br>
-					<br>
-					<br>
                 </div>
+				@endif
             </div>
         </div>
     </div>
