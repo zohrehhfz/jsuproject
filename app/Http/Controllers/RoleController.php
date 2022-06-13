@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -67,16 +68,19 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function active(Request $request, Role $role)
+    public function active(Request $request,Role $role)
     {
-        $request->validate([
-			'user_id' => 'required|int',
-			'role' => 'required|string',
-			'active' => 'required|boolean',
-		]);
-		
-		$role->Update(["user_id" =>$request->user_id ,"role"=>$request->role,"active"=>1]);
+		$role->Update(["user_id" =>$role->user_id ,"role"=>$role->role,"active"=>1]);
         return redirect()->back();
+        
+    }
+	
+	public function unactive(Request $request,Role $role)
+    {
+		$role->Update(["user_id" =>$role->user_id ,"role"=>$role->role,"active"=>0]);
+		
+        return redirect()->back();
+        
     }
 
     /**

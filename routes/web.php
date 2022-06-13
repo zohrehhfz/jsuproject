@@ -27,7 +27,9 @@ Route::get('/', function () {
 Route::get('/travels/show/{travel}' ,[TravelController::class,'show'])->name('ShowTravel');
 Route::get('/travels/index' ,[TravelController::class,'index'])->name('IndexTravel');
 Route::get('/dashboard', [UserController::class,'redirectTo'])->middleware(['auth'])->name('dashboard');
-Route::get('/leaders/unactive/{role}',[RoleController::class, 'active'])->name('updaterole');
+Route::get('/leaders/active/{role}',[RoleController::class,'active'])->name('activeleader');
+Route::get('/leaders/unactive/{role}',[RoleController::class,'unactive'])->name('unactiveleader');
+
 /*Route::get('/dashboard', function (Request $request) {
 	$user = $request->user();
 	$user->load('travels');

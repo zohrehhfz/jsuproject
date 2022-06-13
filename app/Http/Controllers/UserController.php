@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Role;
 
 class UserController extends Controller
 {
@@ -17,7 +18,8 @@ class UserController extends Controller
 		{
 			$user = Auth::user();
 			$user->load('travels');
-			$nonactive_leaders = User::with('roles')->whereHas('roles',function(Builder $query){$query->where('role','=','leader');})->get();
+			$nonactive_leaders = Role::all()->where('role','=','leader');
+			$nonactive_leaders->load('user');
             return view('/panels/admin',['user'=>$user , 'nonactive_leaders'=>$nonactive_leaders]);
         }
 		else

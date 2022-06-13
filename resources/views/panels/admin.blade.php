@@ -43,14 +43,11 @@
 				<div class="p-6 bg-white border-b border-gray-200" dir=rtl>
 					<p>لیدرهای ثبت نام کرده :</p>
 					@foreach ($nonactive_leaders as $leader)
-					<p>نام :{{$leader->name}}</p>
-						@if($leader->roles->first()->active == "true")
-							
+					<p>نام :{{$leader->user->name}}</p>
+						@if($leader->active == 1)
+							<a href="{{route('unactiveleader',[$leader])}}"><button>غیر فعال کردن</button></a>
 						@else
-							<?php
-							$r = $leader->roles->first();
-							echo $r;
-							?>
+							<a href="{{route('activeleader',[$leader])}}"><button>فعال کردن</button></a>
 						@endif
 					@endforeach
                 </div>
