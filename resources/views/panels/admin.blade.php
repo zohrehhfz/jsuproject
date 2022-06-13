@@ -38,6 +38,18 @@
 					@endforeach
                 </div>
 				@endif
+				
+				@if($nonactive_leaders->count() != 0)
+				<div class="p-6 bg-white border-b border-gray-200" dir=rtl>
+					<p>لیدرهای ثبت نام کرده :</p>
+					@foreach ($nonactive_leaders as $leader)
+					<p>نام :{{$leader->name}}</p>
+						@if($leader->roles->first()->active == "true")
+						@else
+						@endif
+					@endforeach
+                </div>
+				@endif
             </div>
         </div>
     </div>

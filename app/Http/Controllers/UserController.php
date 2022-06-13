@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -16,8 +17,8 @@ class UserController extends Controller
 		{
 			$user = Auth::user();
 			$user->load('travels');
-			
-            return view('/panels/admin',['user'=>$user]);
+			$nonactive_leaders = User::with('roles')->whereHas('roles',function(Builder $query){$query->where('role','=','leader');})->get();
+            return view('/panels/admin',['user'=>$user , 'nonactive_leaders'=>$nonactive_leaders]);
         }
 		else
 		{
