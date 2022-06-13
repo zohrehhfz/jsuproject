@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-12" style="font-size:18px;">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200" dir=rtl>
@@ -45,9 +45,9 @@
 					@foreach ($nonactive_leaders as $leader)
 					<p>نام :{{$leader->user->name}}</p>
 						@if($leader->active == 1)
-							<a href="{{route('unactiveleader',[$leader])}}"><button>غیر فعال کردن</button></a>
+							<a href="{{route('unactiveleader',[$leader])}}"><button style="background-color: #4CAF50; font-size: 24px;">غیر فعال کردن</button></a>
 						@else
-							<a href="{{route('activeleader',[$leader])}}"><button>فعال کردن</button></a>
+							<a href="{{route('activeleader',[$leader])}}"><button style="background-color: #4CAF50; font-size: 24px;">فعال کردن</button></a>
 						@endif
 					@endforeach
                 </div>
