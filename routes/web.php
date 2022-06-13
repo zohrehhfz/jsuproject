@@ -27,8 +27,10 @@ Route::get('/dashboard', function (Request $request) {
 	$user = $request->user();
 	$user->load('travels');
 	$user->roles->first();
+	
     return view('dashboard',['user'=>$user]);
 })->middleware(['auth'])->name('dashboard');
+
 
 
 require __DIR__.'/auth.php';
