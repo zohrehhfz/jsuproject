@@ -45,7 +45,12 @@
 					@foreach ($nonactive_leaders as $leader)
 					<p>نام :{{$leader->name}}</p>
 						@if($leader->roles->first()->active == "true")
+							
 						@else
+							<?php
+							$r = $leader->roles->first();
+							echo $r;
+							?>
 						@endif
 					@endforeach
                 </div>

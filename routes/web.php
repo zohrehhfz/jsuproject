@@ -6,6 +6,7 @@ use App\Models\Travel;
 
 use App\Http\Controllers\TravelController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +27,7 @@ Route::get('/', function () {
 Route::get('/travels/show/{travel}' ,[TravelController::class,'show'])->name('ShowTravel');
 Route::get('/travels/index' ,[TravelController::class,'index'])->name('IndexTravel');
 Route::get('/dashboard', [UserController::class,'redirectTo'])->middleware(['auth'])->name('dashboard');
+Route::get('/leaders/unactive/{role}',[RoleController::class, 'active'])->name('updaterole');
 /*Route::get('/dashboard', function (Request $request) {
 	$user = $request->user();
 	$user->load('travels');
