@@ -13,11 +13,10 @@ class UserController extends Controller
 {
     public function redirectTo()
     {
-		
+		$user = Auth::user();
+		$user->load('travels');
         if (Auth::user()->roles->first()->role == "Admin") 
 		{
-			$user = Auth::user();
-			$user->load('travels');
 			$nonactive_leaders = Role::all()->where('role','=','leader');
 			$nonactive_leaders->load('user');
             return view('/panels/admin',['user'=>$user , 'nonactive_leaders'=>$nonactive_leaders]);
