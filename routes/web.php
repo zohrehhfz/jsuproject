@@ -1,8 +1,11 @@
 <?php
 
+namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use App\Models\Travel;
+
 use App\Http\Controllers\TravelController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
@@ -22,15 +25,15 @@ Route::get('/', function () {
 
 Route::get('/travels/show/{travel}' ,[TravelController::class,'show'])->name('ShowTravel');
 Route::get('/travels/index' ,[TravelController::class,'index'])->name('IndexTravel');
-
-Route::get('/dashboard', function (Request $request) {
+Route::get('/dashboard', [UserController::class,'redirectTo'])->middleware(['auth'])->name('dashboard');
+/*Route::get('/dashboard', function (Request $request) {
 	$user = $request->user();
 	$user->load('travels');
 	$user->roles->first();
 	
     return view('dashboard',['user'=>$user]);
 })->middleware(['auth'])->name('dashboard');
-
+*/
 
 
 require __DIR__.'/auth.php';
