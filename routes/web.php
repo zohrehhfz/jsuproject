@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Travel;
 use App\Http\Controllers\TravelController;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,8 +23,10 @@ Route::get('/', function () {
 Route::get('/travels/show/{travel}' ,[TravelController::class,'show'])->name('ShowTravel');
 Route::get('/travels/index' ,[TravelController::class,'index'])->name('IndexTravel');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/dashboard', function (Request $request) {
+	$user = $request->user();
+	$user->load('travels');
+    return view('dashboard',['user'=>$user]);
 })->middleware(['auth'])->name('dashboard');
 
 
