@@ -11,12 +11,17 @@ class UserController extends Controller
 {
     public function redirectTo()
     {
-        if (Auth::user()->roles->first()->role == "Admin") {
+		
+        if (Auth::user()->roles->first()->role == "Admin") 
+		{
 			$user = Auth::user();
 			$user->load('travels');
 			
-            return view('dashboard',['user'=>$user]);
+            return view('/panels/admin',['user'=>$user]);
         }
-        return '/home';
+		else
+		{
+        return view('dashboard',['user'=>$user]);
+		}
     }
 }
