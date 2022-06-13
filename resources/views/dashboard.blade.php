@@ -11,35 +11,35 @@
                 <div class="p-6 bg-white border-b border-gray-200" dir=rtl>
 					
 					<p>نام :
-						@php
-						echo Auth::user()->name;
-						@endphp
+					{{$user->name}}
 						</p>
 						<p> ایمیل :
-						@php
-						echo Auth::user()->email;
-						@endphp
+						{{$user->email}}
 						</p>
 						<p> شماره تماس :
-						@php
-						echo Auth::user()->phone;
-						@endphp
+						{{$user->phone}}
 						</p>
 						<p> سال تولد :
-						@php
-						echo Auth::user()->birthdate;
-						@endphp
+						{{$user->birthdate}}
 						</p>
 						<p> حساب در تاریخ 
-						@php
-						echo Auth::user()->created_at;
-						@endphp
+						{{$user->created_at}}
 						 ایجاد شده است </p>
                 </div>
 				
 				<div class="p-6 bg-white border-b border-gray-200" dir=rtl>
-					
-					
+					<p>سفرهای شما :</p>
+					@foreach ($user->travels as $travel)
+					<a href="{{route('ShowTravel',[$travel])}}"> مقصد: {{$travel->destination}}</a>
+								<p>زمان سفر: {{$travel->traveltime}}</p>
+								<p> شروع ثبت نام: {{$travel->registerationstart}}</p>
+								<p> پایان ثبت نام : {{$travel->registerationend}}</p>
+								<p> توضیحات سفر : {{$travel->description}}</p>
+					@endforeach
+					<br>
+					<br>
+					<br>
+					<br>
                 </div>
 				
             </div>
