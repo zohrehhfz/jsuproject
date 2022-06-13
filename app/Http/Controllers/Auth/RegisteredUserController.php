@@ -68,16 +68,17 @@ class RegisteredUserController extends Controller
 		if($request->role == "leader")
 		{
 			$number = 0;
+
 			Role::create([
 			'user_id' => $user->id,
-			'role' => "user"
+			'role' => $request->role ,
+			'active' => $number
 		]);
 		}
 		
 		Role::create([
 			'user_id' => $user->id,
-			'role' => $request->role ,
-			'active' => $number
+			'role' => "user" ,
 		]);
         event(new Registered($user));
 

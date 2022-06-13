@@ -26,7 +26,7 @@ Route::get('/travels/index' ,[TravelController::class,'index'])->name('IndexTrav
 Route::get('/dashboard', function (Request $request) {
 	$user = $request->user();
 	$user->load('travels');
-	$user->load('roles');
+	$user->roles->first();
     return view('dashboard',['user'=>$user]);
 })->middleware(['auth'])->name('dashboard');
 
