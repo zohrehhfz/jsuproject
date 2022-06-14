@@ -36,28 +36,22 @@
                 </div>
             @endif
 			
-			<form action="{{route('storeBook')}}" method="post" >
+			<form action="{{route('StoreTravel')}}" method="post" >
 			@csrf
 			
-				<div> مقصد: </div>
-				<div> <input type="text" name="destination" placeholder="Enter destination"></div>
-				</div>
-				<div>
-					<div > زمان سفر : </div>
-					<div > <input type="date" name="traveltime" ></div>
-				</div>
-				<div > شروع ثبت نام : </div>
-					<div > <input type="date" name="registerationstart" ></div>
-				</div>
-				<div > پایان ثبت نام : </div>
-					<div > <input type="date" name="registerationend"></div>
-				</div>
-				<div>
-					<div> توضیحات سفر : </div>
-					<div> <input type="text" name="description"> </div>
-				</div>
-				<div> <button type="submit" class="btn btn-success"> ثبت </button></div>
-			
+				<p style="font-size:20px;"> مقصد: </p>
+				 <input type="text" name="destination" placeholder="مقصد را وارد کنید" style="font-size:20px;">
+				  <p style="font-size:20px;">زمان سفر : </p>
+				 <input type="date" name="traveltime" style="font-size:20px;">
+				 <p style="font-size:20px;">شروع ثبت نام : </p>
+				<input type="date" name="registerationstart" style="font-size:20px;">
+				<p style="font-size:20px;">پایان ثبت نام : </p>
+					<input type="date" name="registerationend" style="font-size:20px;">
+				<p style="font-size:20px;"> توضیحات سفر : </p>
+					<input type="text" name="description" style="font-size:18px;">
+				<br>
+				<button type="submit" style="background-color:#8859d5; color:white; font-size:20px;"> ثبت </button></div>
+			</div>
 		</form>
 		
 					

@@ -36,7 +36,7 @@ class TravelController extends Controller
      */
     public function create()
     {
-        //
+        return view('travels.add');
     }
 
     /**
@@ -47,7 +47,7 @@ class TravelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return hiii;
     }
 
     /**

@@ -23,6 +23,8 @@ Route::get('/', function () {
 	$travels = Travel::all();
     return view('welcome',['travels'=>$travels]);
 });
+Route::get('/travels/create',[TravelController::class, 'create'])->name('CreateTravel');
+Route::post('/travels/store',[TravelController::class, 'store'])->name('StoreTravel');
 
 Route::get('/travels/show/{travel}' ,[TravelController::class,'show'])->name('ShowTravel');
 Route::get('/travels/index' ,[TravelController::class,'index'])->name('IndexTravel');
@@ -31,6 +33,7 @@ Route::get('/leaders/active/{role}',[RoleController::class,'active'])->name('act
 Route::get('/leaders/unactive/{role}',[RoleController::class,'unactive'])->name('unactiveleader');
 Route::get('/travels/travelforyou/{travel}',[TravelController::class, 'AddTravelForUser'])->name('AddTravelForUser');
 Route::get('/travels/cancel/{travel}',[TravelController::class, 'CancleTravel'])->name('CancleTravel');
+
 
 /*Route::get('/dashboard', function (Request $request) {
 	$user = $request->user();
