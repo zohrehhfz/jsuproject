@@ -70,7 +70,11 @@
 							}
 						}								
 					?>
-					
+					@auth
+					@if(Auth::user()->roles->where("role",'Admin')->count() == "1")
+					<button style="background-color:#8859d5; color:white; font-size:15px;"><a href="{{route('AddTravelForUser',[$travel])}}"> حذف سفر</a></button>
+					@endif
+					@endauth
 					</div>
 					<br>
 					<br>
