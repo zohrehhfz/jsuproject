@@ -29,6 +29,7 @@ Route::get('/travels/index' ,[TravelController::class,'index'])->name('IndexTrav
 Route::get('/dashboard', [UserController::class,'redirectTo'])->middleware(['auth'])->name('dashboard');
 Route::get('/leaders/active/{role}',[RoleController::class,'active'])->name('activeleader');
 Route::get('/leaders/unactive/{role}',[RoleController::class,'unactive'])->name('unactiveleader');
+Route::get('/travels/travelforyou/{travel}',[TravelController::class, 'AddTravelForUser'])->name('AddTravelForUser');
 
 /*Route::get('/dashboard', function (Request $request) {
 	$user = $request->user();

@@ -37,6 +37,9 @@
             @endif
 				
 					<div>
+					@if( $message == "1" )
+						<p> شما در این سفر ثبت نام کرده اید </p>
+					@endif
 					<p> مقصد: {{$travel->destination}}</p>
 								<p>زمان سفر: {{$travel->traveltime}}</p>
 								<p> شروع ثبت نام: {{$travel->registerationstart}}</p>
@@ -56,19 +59,18 @@
 						if($currentyear <= $year)
 						{	
 							if ((($currentmonth == $month) && ($currentday <= $day)) || ($currentmonth < $month))
-							{
-								
+							{	
 						?>
 								
-								<button style="background-color:#8859d5; color:white; font-size:15px;"><a href="{{route('ShowTravel',[$travel])}}">ثبت نام در سفر </a></button>
+								<button style="background-color:#8859d5; color:white; font-size:15px;"><a href="{{route('AddTravelForUser',[$travel])}}">ثبت نام در سفر </a></button>
 								<br>
 								<br>
 								<hr>
 						<?php
 							}
-						}							
-							
+						}								
 					?>
+					
 					</div>
 					<br>
 					<br>

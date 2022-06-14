@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\Travel;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -16,8 +18,9 @@ class TravelController extends Controller
 	 public function __construct()
     {
         $this->middleware('auth')->except(['show','index']);
-        $this->middleware('admin')->except(['show','index']);
-		$this->middleware('leader')->except(['show','index']);
+		$this->redirectTo = url()->previous();
+        $this->middleware('admin')->except(['show','index','AddTravelForUser']);
+		$this->middleware('leader')->except(['show','index','AddTravelForUser']);
     }
 	
     public function index()
@@ -55,7 +58,8 @@ class TravelController extends Controller
      */
     public function show(Travel $travel)
     {
-        return view('travels.show',['travel'=>$travel]);
+		$message = "0";
+        return view('travels.show',['travel'=>$travel , 'message'=>$message]);
     }
 
     /**
@@ -68,6 +72,7 @@ class TravelController extends Controller
     {
         //
     }
+	
 
     /**
      * Update the specified resource in storage.
@@ -90,5 +95,15 @@ class TravelController extends Controller
     public function destroy(Travel $travel)
     {
         //
+    }
+	public function AddTravelForUser(Travel $travel)
+    {
+        $user = Auth::user();
+		$user_with_travels = $user->travels;
+		$count = $user_with_travels->where('id',$travel->id)->count();
+		if($count == 0)
+			$user->travels()->attach($travel , ['role'=>"user"]);
+		$message = "1";
+		return view('travels.show',['travel'=>$travel , 'message'=>$message]);
     }
 }
