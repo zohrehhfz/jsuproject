@@ -36,7 +36,8 @@ class TravelController extends Controller
      */
     public function create()
     {
-        return view('travels.add');
+		$message = 0;
+        return view('travels.add',['message'=>$message]);
     }
 
     /**
@@ -47,7 +48,78 @@ class TravelController extends Controller
      */
     public function store(Request $request)
     {
-        return hiii;
+		
+        $request->validate([
+			'destination' => 'required|string|max:255',
+			'traveltime' => 'required',
+			'registerationstart' => 'required',
+			'registerationend' => 'required',
+		]);
+		//barresi baze zamani
+		 $t = Travel::all()->where('destination',$request->destination);
+		 $c = $t->where('traveltime',$request->traveltime)->count();
+		 if($c > 0)
+		 {
+			return redirect()->back()->withErrors(['error' => 'این سفر قبلا ثبت شده است']);
+
+		 }
+		$rs = strtotime($request->registerationstart);
+		$re = strtotime($request->registerationend);
+		$tr = strtotime($request->traveltime);
+		
+		$daytraveltime = date('d',$tr);
+		$monthtraveltime = date('m',$tr);
+		$yeartraveltime = date('Y',$tr);
+		
+		$daystart = date('d',$rs);
+		$monthstart = date('m',$rs);
+		$yearstart = date('Y',$rs);
+		
+		$dayend = date('d',$re);
+		$monthend = date('m',$re);
+		$yearend = date('Y',$re);
+							
+		$currentyear = date("Y");
+		$currentmonth = date("m");
+		$currentday = date("d");
+							
+		if($yearstart <= $yearend)
+		{	
+			if ((($monthend == $monthstart) && ($daystart <= $dayend)) || ($monthstart < $monthend))
+			{
+					if($yearend <= $yeartraveltime)
+					{	
+						if ((($monthend == $monthtraveltime) && ($dayend <= $daytraveltime)) || ($monthend < $monthtraveltime))
+							{
+								$travel = Travel::Create(["destination" =>$request->destination ,"traveltime"=>$request->traveltime,
+								'registerationstart'=> $request->registerationstart, 'registerationend'=>$request->registerationend
+								,"description"=>$request->description ,"cancel"=>0]);
+								
+								$user = Auth::user();
+								$travel->users()->attach($user , ["role" => "leader"]);
+								
+							}
+							else
+							{
+								return redirect()->back()->withErrors(['error' => 'تاریخ ها معتبر نیستند']);
+							}
+					}
+					else
+					{
+						return redirect()->back()->withErrors(['error' => 'تاریخ ها معتبر نیستند']);
+					}
+			}
+			else
+			{
+			return redirect()->back()->withErrors(['error' => 'تاریخ ها معتبر نیستند']);
+			}
+		}
+		else
+		{
+			return redirect()->back()->withErrors(['error' => 'تاریخ ها معتبر نیستند']);
+		}
+		$message = 1;
+		return view('travels.add',['message'=>$message]);
     }
 
     /**
