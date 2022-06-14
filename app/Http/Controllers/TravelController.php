@@ -106,4 +106,10 @@ class TravelController extends Controller
 		$message = "1";
 		return view('travels.show',['travel'=>$travel , 'message'=>$message]);
     }
+	public function CancleTravel(Travel $travel)
+    {
+		$travel->Update(["cancel"=>1]);
+        return redirect()->back();
+    }
+	
 }

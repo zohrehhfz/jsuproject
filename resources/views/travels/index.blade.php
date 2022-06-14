@@ -53,7 +53,7 @@
 							$currentyear = date("Y");
 							$currentmonth = date("m");
 							$currentday = date("d");
-						if($currentyear <= $year)
+						if(($currentyear <= $year) && ( $travel->cancel == 0))
 						{	
 							if ((($currentmonth == $month) && ($currentday <= $day)) || ($currentmonth < $month))
 							{

@@ -40,6 +40,9 @@
 					@if( $message == "1" )
 						<p> شما در این سفر ثبت نام کرده اید </p>
 					@endif
+					@if( $travel->cancel == 1 )
+						<p> این سفر کنسل شده است </p>
+					@endif
 					<p> مقصد: {{$travel->destination}}</p>
 								<p>زمان سفر: {{$travel->traveltime}}</p>
 								<p> شروع ثبت نام: {{$travel->registerationstart}}</p>
@@ -56,7 +59,7 @@
 							$currentyear = date("Y");
 							$currentmonth = date("m");
 							$currentday = date("d");
-						if($currentyear <= $year)
+						if(($currentyear <= $year) && ( $travel->cancel == 0))
 						{	
 							if ((($currentmonth == $month) && ($currentday <= $day)) || ($currentmonth < $month))
 							{	
@@ -66,15 +69,16 @@
 								<br>
 								<br>
 								<hr>
+								@auth
+								@if((Auth::user()->roles->where("role",'Admin')->count() == "1") && ($travel->cancel == 0))
+								<button style="background-color:#8859d5; color:white; font-size:15px;"><a href="{{route('CancleTravel',[$travel])}}"> حذف سفر</a></button>
+								@endif
+								@endauth
 						<?php
 							}
 						}								
 					?>
-					@auth
-					@if(Auth::user()->roles->where("role",'Admin')->count() == "1")
-					<button style="background-color:#8859d5; color:white; font-size:15px;"><a href="{{route('AddTravelForUser',[$travel])}}"> حذف سفر</a></button>
-					@endif
-					@endauth
+					
 					</div>
 					<br>
 					<br>

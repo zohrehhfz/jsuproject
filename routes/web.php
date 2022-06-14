@@ -30,6 +30,7 @@ Route::get('/dashboard', [UserController::class,'redirectTo'])->middleware(['aut
 Route::get('/leaders/active/{role}',[RoleController::class,'active'])->name('activeleader');
 Route::get('/leaders/unactive/{role}',[RoleController::class,'unactive'])->name('unactiveleader');
 Route::get('/travels/travelforyou/{travel}',[TravelController::class, 'AddTravelForUser'])->name('AddTravelForUser');
+Route::get('/travels/cancel/{travel}',[TravelController::class, 'CancleTravel'])->name('CancleTravel');
 
 /*Route::get('/dashboard', function (Request $request) {
 	$user = $request->user();
