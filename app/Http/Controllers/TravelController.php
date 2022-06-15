@@ -18,7 +18,7 @@ class TravelController extends Controller
 	 public function __construct()
     {
         $this->middleware('auth')->except(['show','index']);
-		$this->redirectTo = url()->previous();
+		
         $this->middleware('admin')->except(['show','index','AddTravelForUser']);
 		$this->middleware('leader')->except(['show','index','AddTravelForUser']);
     }
@@ -46,6 +46,7 @@ class TravelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+	 
     public function store(Request $request)
     {
 		
@@ -60,7 +61,7 @@ class TravelController extends Controller
 		 $c = $t->where('traveltime',$request->traveltime)->count();
 		 if($c > 0)
 		 {
-			return redirect()->back()->withErrors(['error' => 'این سفر قبلا ثبت شده است']);
+			return redirect()->back()->withErrors(['error' => 'این سفر قبلا برای شما ثبت شده است']);
 
 		 }
 		$rs = strtotime($request->registerationstart);
@@ -142,7 +143,7 @@ class TravelController extends Controller
      */
     public function edit(Travel $travel)
     {
-        //
+       return view('travels.edit',['travel'=>$travel]);
     }
 	
 
@@ -155,7 +156,69 @@ class TravelController extends Controller
      */
     public function update(Request $request, Travel $travel)
     {
-        //
+        $request->validate([
+			'destination' => 'required|string|max:255',
+			'traveltime' => 'required',
+			'registerationstart' => 'required',
+			'registerationend' => 'required',
+		]);
+		//barresi baze zamani
+		 
+		$rs = strtotime($request->registerationstart);
+		$re = strtotime($request->registerationend);
+		$tr = strtotime($request->traveltime);
+		
+		$daytraveltime = date('d',$tr);
+		$monthtraveltime = date('m',$tr);
+		$yeartraveltime = date('Y',$tr);
+		
+		$daystart = date('d',$rs);
+		$monthstart = date('m',$rs);
+		$yearstart = date('Y',$rs);
+		
+		$dayend = date('d',$re);
+		$monthend = date('m',$re);
+		$yearend = date('Y',$re);
+							
+		$currentyear = date("Y");
+		$currentmonth = date("m");
+		$currentday = date("d");
+							
+		if($yearstart <= $yearend)
+		{	
+			if ((($monthend == $monthstart) && ($daystart <= $dayend)) || ($monthstart < $monthend))
+			{
+					if($yearend <= $yeartraveltime)
+					{	
+						if ((($monthend == $monthtraveltime) && ($dayend <= $daytraveltime)) || ($monthend < $monthtraveltime))
+							{
+								$travel->Update(["destination" =>$request->destination ,"traveltime"=>$request->traveltime,
+								'registerationstart'=> $request->registerationstart, 'registerationend'=>$request->registerationend
+								,"description"=>$request->description ,"cancel"=>0]);
+								
+								$message = "0";
+								return view('travels.show',['travel'=>$travel , 'message'=>$message]);
+								
+							}
+							else
+							{
+								return redirect()->back()->withErrors(['error' => 'تاریخ ها معتبر نیستند']);
+							}
+					}
+					else
+					{
+						return redirect()->back()->withErrors(['error' => 'تاریخ ها معتبر نیستند']);
+					}
+			}
+			else
+			{
+			return redirect()->back()->withErrors(['error' => 'تاریخ ها معتبر نیستند']);
+			}
+		}
+		else
+		{
+			return redirect()->back()->withErrors(['error' => 'تاریخ ها معتبر نیستند']);
+		}
     }
 
     /**

@@ -38,47 +38,35 @@
 			
 					
 					<div>
-					@foreach ($travels as $travel)
-					<a href="{{route('ShowTravel',[$travel])}}"> مقصد: {{$travel->destination}}</a>
-					<p>زمان سفر: {{$travel->traveltime}}</p>
-								<p> شروع ثبت نام: {{$travel->registerationstart}}</p>
-								<p> پایان ثبت نام : {{$travel->registerationend}}</p>
-								<p> توضیحات سفر : {{$travel->description}}</p>
-					<?php
-							$time = strtotime($travel->registerationend);
-							$day = date('d',$time);
-							$month = date('m',$time);
-							$year = date('Y',$time);
-							
-							$currentyear = date("Y");
-							$currentmonth = date("m");
-							$currentday = date("d");
-						if(($currentyear <= $year) && ( $travel->cancel == 0))
-						{	
-							if ((($currentmonth == $month) && ($currentday <= $day)) || ($currentmonth < $month))
-							{
-								
-						?>
-								
-								<button style="background-color:#8859d5; color:white; font-size:15px;"><a href="{{route('ShowTravel',[$travel])}}">ثبت نام در سفر </a></button>
-								<br>
-								<br>
-								<hr>
-						<?php
-							}
-						}							
-							
-					?>
+					@if ($errors->any())
+				<ul>
+					@foreach ($errors->all() as $error)
+						<li style="color:#E74C3C">{{ $error }}</li>
 					@endforeach
-					</div>
-					<br>
-					<br>
-					<br>
-					<br>
-					
-                    <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                        Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-                    </div>
+				</ul>
+		@endif
+					<form action="{{route('UpdateTravel',[$travel])}}" method="post" >
+			@csrf
+			
+				<p style="font-size:20px;"> مقصد: </p>
+				 <input type="text" name="destination" value="{{$travel->destination}}" style="font-size:20px;">
+				  
+				 <p style="font-size:20px;">زمان سفر : </p>
+				 <input type="text" name="traveltime" placeholder="{{$travel->traveltime}}" value="{{$travel->traveltime}}" onfocus="(this.type='date')" style="font-size:20px;">
+				 
+				 <p style="font-size:20px;">شروع ثبت نام : </p>
+				<input type="text" name="registerationstart" placeholder="{{$travel->registerationstart}}" value="{{$travel->registerationstart}}" onfocus="(this.type='date')" style="font-size:20px;">
+				
+				<p style="font-size:20px;">پایان ثبت نام : </p>
+				<input type="text" name="registerationend" placeholder="{{$travel->registerationend}}" value="{{$travel->registerationend}}" onfocus="(this.type='date')" style="font-size:20px;">
+				
+				<p style="font-size:20px;"> توضیحات سفر : </p>
+					<input type="text" name="description" value="{{$travel->description}}" style="font-size:18px;">
+				<br>
+				<button type="submit" style="background-color:#8859d5; color:white; font-size:20px;"> ثبت تغییرات </button></div>
+			</div>
+		</form>
+                    
                 </div>
     </body>
 </html>

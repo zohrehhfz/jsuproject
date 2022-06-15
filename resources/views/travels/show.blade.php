@@ -38,10 +38,10 @@
 				
 					<div>
 					@if( $message == "1" )
-						<p> شما در این سفر ثبت نام کرده اید </p>
+						<p style="color:green; font-size:15px;"> این سفر با موفقست برای شما ثبت شده است</p>
 					@endif
 					@if( $travel->cancel == 1 )
-						<p> این سفر کنسل شده است </p>
+						<p style="color:red; font-size:15px;"> این سفر کنسل شده است </p>
 					@endif
 					<p> مقصد: {{$travel->destination}}</p>
 								<p>زمان سفر: {{$travel->traveltime}}</p>
@@ -72,7 +72,10 @@
 								@auth
 								@if((Auth::user()->roles->where("role",'Admin')->count() == "1") && ($travel->cancel == 0))
 								<button style="background-color:#8859d5; color:white; font-size:15px;"><a href="{{route('CancleTravel',[$travel])}}"> حذف سفر</a></button>
+								<button style="background-color:#8859d5; color:white; font-size:15px;"><a href="{{ route('EditTravel',[$travel]) }}"> تغییر اطلاعات سفر</a></button>
+
 								@endif
+								
 								@endauth
 						<?php
 							}
