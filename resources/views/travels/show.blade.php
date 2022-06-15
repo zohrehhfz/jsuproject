@@ -48,6 +48,7 @@
 								<p> شروع ثبت نام: {{$travel->registerationstart}}</p>
 								<p> پایان ثبت نام : {{$travel->registerationend}}</p>
 								<p> توضیحات سفر : {{$travel->description}}</p>
+								<p> تعداد افراد ثبت نام کرده در این سفر : {{$number}}</p>
 								<br>
 								<br>
 					<?php

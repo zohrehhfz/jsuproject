@@ -45,7 +45,7 @@
 		@endif
 		</div>
 		@if( $message == "1" )
-		<p> سفر با موفقیت ثبت شد</p>
+		<p> سفر با موفقیت ثبت شده است</p>
 		@endif
 			<form action="{{route('StoreTravel')}}" method="post" >
 			@csrf

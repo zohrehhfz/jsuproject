@@ -18,7 +18,6 @@ class TravelController extends Controller
 	 public function __construct()
     {
         $this->middleware('auth')->except(['show','index']);
-		
         $this->middleware('admin')->except(['show','index','AddTravelForUser']);
 		$this->middleware('leader')->except(['show','index','AddTravelForUser']);
     }
@@ -61,7 +60,7 @@ class TravelController extends Controller
 		 $c = $t->where('traveltime',$request->traveltime)->count();
 		 if($c > 0)
 		 {
-			return redirect()->back()->withErrors(['error' => 'این سفر قبلا برای شما ثبت شده است']);
+			return redirect()->back()->withErrors(['error' => 'این سفر قبلا ثبت شده است']);
 
 		 }
 		$rs = strtotime($request->registerationstart);
@@ -131,8 +130,9 @@ class TravelController extends Controller
      */
     public function show(Travel $travel)
     {
+		$number = $travel->users()->count();
 		$message = "0";
-        return view('travels.show',['travel'=>$travel , 'message'=>$message]);
+        return view('travels.show',['travel'=>$travel , 'message'=>$message ,'number'=>$number]);
     }
 
     /**
@@ -197,7 +197,8 @@ class TravelController extends Controller
 								,"description"=>$request->description ,"cancel"=>0]);
 								
 								$message = "0";
-								return view('travels.show',['travel'=>$travel , 'message'=>$message]);
+								$number = $travel->users()->count();
+								return view('travels.show',['travel'=>$travel , 'message'=>$message ,'number'=>$number]);
 								
 							}
 							else
@@ -239,7 +240,8 @@ class TravelController extends Controller
 		if($count == 0)
 			$user->travels()->attach($travel , ['role'=>"user"]);
 		$message = "1";
-		return view('travels.show',['travel'=>$travel , 'message'=>$message]);
+		$number = $travel->users()->count();
+		return view('travels.show',['travel'=>$travel , 'message'=>$message ,'number'=>$number]);
     }
 	public function CancleTravel(Travel $travel)
     {

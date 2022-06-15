@@ -67,6 +67,7 @@
 								<p> شروع ثبت نام : {{$travel->registerationstart}}</p>
 								<p> پایان ثبت نام : {{$travel->registerationend}}</p>
 								<p> توضیحات سفر : {{$travel->description}}</p>
+								<hr style="height:1px;border-width:0;color:gray;background-color:gray">
 						<?php
 							}
 						}							
