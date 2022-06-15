@@ -22,7 +22,7 @@
 	</head>
 	
 	
-	<body style="height:1500px">
+	<body dir="rtl">
 		@include('my_navbar')
 		<div class="container-fluid"><br>
 			@yield('content')
