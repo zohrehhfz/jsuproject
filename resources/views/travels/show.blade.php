@@ -38,7 +38,7 @@
 				
 					<div>
 					@if( $message == "1" )
-						<p style="color:green; font-size:15px;"> این سفر با موفقست برای شما ثبت شده است</p>
+						<p style="color:green; font-size:15px;"> این سفر با موفقیت برای شما ثبت شده است</p>
 					@endif
 					@if( $travel->cancel == 1 )
 						<p style="color:red; font-size:15px;"> این سفر کنسل شده است </p>

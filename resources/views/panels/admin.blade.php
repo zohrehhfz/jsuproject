@@ -35,7 +35,9 @@
 								<p> شروع ثبت نام: {{$travel->registerationstart}}</p>
 								<p> پایان ثبت نام : {{$travel->registerationend}}</p>
 								<p> توضیحات سفر : {{$travel->description}}</p>
-								
+								@if($travel->cancel == 1)
+									<p style="color:red; font-size:18px;"> این سفر کنسل شده است </p>
+								@endif
 								<hr style="height:2px;border-width:0;color:gray;background-color:gray">
 					@endforeach
                 </div>
