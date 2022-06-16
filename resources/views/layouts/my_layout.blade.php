@@ -22,7 +22,7 @@
 	</head>
 	
 	
-	<body dir="rtl">
+	<body class="antialiased" dir="rtl">
 		@include('my_navbar')
 		<div class="container-fluid"><br>
 			@yield('content')
