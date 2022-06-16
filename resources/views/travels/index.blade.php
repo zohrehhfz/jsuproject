@@ -1,7 +1,7 @@
 @extends('layouts.my_layout')
 @section('title', 'سفرها')
 @section('content')
-<nav class="navbar navbar-expand-sm bg-success navbar-dark sticky-top">
+<nav class="navbar navbar-expand-sm navbar-dark sticky-top">
   <div class="container-fluid"> 
 	<ul class="navbar-nav">
 		<li class="nav-item">
@@ -31,11 +31,16 @@
             
 	<div>
 					@foreach ($travels as $travel)
-					<a href="{{route('ShowTravel',[$travel])}}"> مقصد: {{$travel->destination}}</a>
-					<p>زمان سفر: {{$travel->traveltime}}</p>
-								<p> شروع ثبت نام: {{$travel->registerationstart}}</p>
-								<p> پایان ثبت نام : {{$travel->registerationend}}</p>
-								<p> توضیحات سفر : {{$travel->description}}</p>
+					<div class="div2 divhover">
+					<a href="{{route('ShowTravel',[$travel])}}" style="color:black;"> مقصد: {{$travel->destination}}</a>
+					<br>
+					<br>
+					<div class="row">
+					<p >زمان سفر: {{$travel->traveltime}}</p>
+					</div>
+								<div class="row"><p> شروع ثبت نام: {{$travel->registerationstart}}</p></div>
+								<div class="row"><p> پایان ثبت نام : {{$travel->registerationend}}</p></div>
+								<div class="row"><p> توضیحات سفر : {{$travel->description}}</p></div>
 								@if( $travel->cancel == 1 )
 						<p style="color:red; font-size:15px;"> این سفر کنسل شده است </p>
 					@endif
@@ -55,7 +60,9 @@
 								
 						?>
 								
-								<button style="background-color:white; color:white; font-size:15px;"><a href="{{route('ShowTravel',[$travel])}}">ثبت نام در سفر </a></button>
+								<button id="submitbutton"><a href="{{route('ShowTravel',[$travel])}}" style="color: #E2F1F1; text-decoration:none;">ثبت نام در سفر </a></button>
+								
+</div>
 								<br>
 								<br>
 								<hr>
@@ -64,10 +71,12 @@
 						}							
 							
 					?>
-					@endforeach
 					</div>
 					<br>
 					<br>
+					
+					@endforeach
+				
 					<br>
 					<br>
 </div>

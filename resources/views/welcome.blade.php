@@ -1,7 +1,7 @@
 @extends('layouts.my_layout')
 @section('title', 'خانه')
 @section('content')
-<nav class="navbar navbar-expand-sm bg-success navbar-dark sticky-top">
+<nav class="navbar navbar-expand-sm navbar-dark sticky-top">
   <div class="container-fluid"> 
 	<ul class="navbar-nav">
 		<li class="nav-item">
@@ -31,9 +31,46 @@
 </nav>
 
 	<div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">	
-					<div>
+			<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+			  <div class="carousel-indicators">
+				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			  </div>
+			  <div class="carousel-inner">
+				<div class="carousel-item active">
+				  <img src="img1.jpg" class="d-block w-50" alt="picture not found">
+				  <div class="carousel-caption d-none d-md-block">
+					<h5> قلعه رودخان</h5>
+					<p>جاذبه گردشگری استان گیلان</p>
+				  </div>
+				</div>
+				<div class="carousel-item">
+				  <img src="img3.jpg" class="d-block w-50" alt="picture not found">
+				  <div class="carousel-caption d-none d-md-block">
+					<h5>شهرستان سروآباد</h5>
+					<p>جاذبه گردشگری استان کردستان</p>
+				  </div>
+				</div>
+				<div class="carousel-item">
+				  <img src="img2.jpg" class="d-block w-50" alt="picture not found">
+				  <div class="carousel-caption d-none d-md-block">
+					<h5>دربند</h5>
+					<p>جاذبه گردشگری استان تهران</p>
+				  </div>
+				</div>
+			  </div>
+			  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			  </button>
+			  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			  </button>
+			</div>
 					@foreach ($travels as $travel)
-					
+					<div class="div1">
 					<?php
 							$time = strtotime($travel->registerationend);
 							$day = date('d',$time);
@@ -51,7 +88,9 @@
 								
 						?>
 								
-								<a href="{{route('ShowTravel',[$travel])}}"> مقصد: {{$travel->destination}}</a>
+								<a href="{{route('ShowTravel',[$travel])}}" style="color:black;"> مقصد: {{$travel->destination}}</a>
+								<br>
+								<br>
 								<p>زمان سفر : {{$travel->traveltime}}</p>
 								<p> شروع ثبت نام : {{$travel->registerationstart}}</p>
 								<p> پایان ثبت نام : {{$travel->registerationend}}</p>
@@ -62,8 +101,13 @@
 						}							
 							
 					?>
-					@endforeach
 					</div>
+					<br>
+					<br>
+					<br>
+					<br>
+					@endforeach
+					
 					<br>
 					<br>
 					
