@@ -1,6 +1,25 @@
 @extends('layouts.my_layout')
 @section('title', 'پنل کاربری')
 @section('content')
+<nav class="navbar navbar-expand-sm bg-success navbar-dark sticky-top">
+  <div class="container-fluid"> 
+	<ul class="navbar-nav">
+		<li class="nav-item">
+			@if (Route::has('login'))
+			     <a href="{{ route('IndexTravel') }}" class="navbar-brand">سفرها</a>
+				 @if($user->roles->where("role",'leader')->count() == "1")
+						<a href="{{ route('CreateTravel') }}" class="navbar-brand">افزودن سفر</a>
+					@endif
+                    
+					
+                </div>
+            @endif
+		</li>
+		
+	</ul>
+  </div>
+</nav>
+
 <x-app-layout>
 <x-slot name="header">
 

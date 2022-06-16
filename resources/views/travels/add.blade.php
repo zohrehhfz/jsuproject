@@ -1,8 +1,32 @@
 @extends('layouts.my_layout')
 @section('title', 'افزودن سفر')
 @section('content')
+<nav class="navbar navbar-expand-sm bg-success navbar-dark sticky-top">
+  <div class="container-fluid"> 
+	<ul class="navbar-nav">
+		<li class="nav-item">
+			@if (Route::has('login'))
+			     <a href="{{ route('IndexTravel') }}" class="navbar-brand">سفرها</a>
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="navbar-brand">پنل کاربری</a>
+                    @else
+                        <a href="{{ route('login') }}" class="navbar-brand">ورود به حساب</a>
 
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="navbar-brand">ثبت نام</a>
+                        @endif
+                    @endauth
+					
+                </div>
+            @endif
+		</li>
+		
+	</ul>
+  </div>
+</nav>
 <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+
+
 	@if ($errors->any())
 				<ul>
 					@foreach ($errors->all() as $error)
