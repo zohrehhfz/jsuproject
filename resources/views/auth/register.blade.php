@@ -1,5 +1,5 @@
 @extends('layouts.my_layout')
-@section('title', 'پنل ')
+@section('title', 'ایجاد حساب ')
 @section('content')
 	    <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
