@@ -1,7 +1,7 @@
 @extends('layouts.my_layout')
 @section('title', 'تغییر اطلاعات سفر')
 @section('content')
-<nav class="navbar navbar-expand-sm bg-success navbar-dark sticky-top">
+<nav class="navbar navbar-expand-sm navbar-dark sticky-top">
   <div class="container-fluid"> 
 	<ul class="navbar-nav">
 		<li class="nav-item">

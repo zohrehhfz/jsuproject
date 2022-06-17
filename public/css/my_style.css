@@ -187,6 +187,13 @@ a:hover {
   margin: 5vh 12vw 0vh 0vw;
 }
 
+.li2
+{
+  padding-left: 1vw;
+  font-size: 1.2em;
+  color: white;
+}
+
 /*
 #mybutton {
     border-radius: 20px;
