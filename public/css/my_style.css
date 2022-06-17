@@ -18,8 +18,7 @@ nav {
     border-radius: 20px;
     width: 75%;
     background-color: white;
-    margin: -10vh 12vw 0vh 0vw;
-    box-shadow: 10px 10px 15px rgba(43, 83, 82, 0.8);
+    margin: 5vh 12vw 0vh 0vw;
 }
 
 .div2 {
@@ -34,7 +33,7 @@ a:hover {
     color: #341994;
 }
 
-img
+.wlcomimg
 {
     margin: 0vh 25vw 0vh 0vw;
 }
@@ -80,14 +79,14 @@ img
     position: absolute;
     width: 95%;
     height: 270px;
-    background: #523a96;
+    background: #389191;
     border-radius: 20px;
     z-index: -1;
     animation: 1s clockwise infinite;
   }
   
   .divhover:hover:after {
-    background: #dd29b6;
+    background: #dd29bf;
     animation: 2s counterclockwise infinite;
   }
   
@@ -169,18 +168,23 @@ img
     }
   }
 
-  .div2 {
-    
-    width: 75%;
-    height: 265px;
-}
 .div2 {
     display: block;
     text-align: center; 
     border-radius: 20px;
     width: 75%;
+    height: 265px;
     background-color: white;
     margin: 0vh 12vw 0vh 0vw;
+}
+
+.div1 {
+  display: block;
+  text-align: center;  
+  border-radius: 20px;
+  width: 75%;
+  background-color: white;
+  margin: 5vh 12vw 0vh 0vw;
 }
 
 /*
