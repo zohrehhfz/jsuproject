@@ -2,13 +2,13 @@
 @section('title', 'ایجاد حساب ')
 @section('content')
 	    <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
+	
         <form method="POST" action="{{ route('register') }}" dir="rtl" enctype="multipart/form-data">
             @csrf
 			
-			<div class="col-lg-2 col-md-2 mt-3 "> آپلود عکس شما : </div>
-			<div class="col-lg-3 col-md-3  mt-3"> <input type="file" name="photo" id="photo"> </div>
-			
+			<div> آپلود عکس شما : </div>
+			<div> <input type="file" name="photo" id="photo"> </div>
+			<br>
             <!-- Name -->
             <div>
                 <x-label for="name" :value="__('نام')" />
@@ -68,9 +68,10 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-button class="ml-4" style="background-color:black;">
+                <x-button id="submitbutton">
                     {{ __('Register') }}
                 </x-button>
             </div>
         </form>
+		
 @endsection
