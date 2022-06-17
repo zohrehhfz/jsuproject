@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Travel;
 use App\Models\Role;
 
 class UserController extends Controller
@@ -25,5 +26,15 @@ class UserController extends Controller
 		{
         return view('dashboard',['user'=>$user]);
 		}
+    }
+	public function CancleTrvaelForUser(Travel $travel)
+    {
+		$user = Auth::user();
+		$r = $user->travels()->where('travel_id', $travel->id)->firstOrFail()->pivot->role;
+		if($r == "user")
+			$user->travels()->detach($travel);
+		$message = "3";
+		$number = $travel->users()->count();
+		return view('travels.show',['travel'=>$travel , 'message'=>$message ,'number'=>$number]);
     }
 }

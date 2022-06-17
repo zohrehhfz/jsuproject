@@ -245,8 +245,23 @@ class TravelController extends Controller
     }
 	public function CancleTravel(Travel $travel)
     {
+		$user = Auth::user();
+		$admin = $user->roles->where('role','Admin')->count();
+
+		$leader = $user->roles->where('role','leader')->count();
+		if($leader == 1)
+		{
+				$r = $user->travels()->where('travel_id', $travel->id)->firstOrFail()->pivot->role;
+				
+		}
+		
+		if(($admin == 1) || ($r == "leader"))
+		{
 		$travel->Update(["cancel"=>1]);
-        return redirect()->back();
+        return redirect()->back()->withErrors(['error' => 'سفر کنسل شد']);;
+		}	
+		
+        return redirect()->back()->withErrors(['error' => 'شما اجازه حذف این سفر را ندارید']);
     }
 	
 }

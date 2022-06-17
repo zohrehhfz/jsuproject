@@ -41,8 +41,18 @@
 
 <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">	
 					<div>
+						@if ($errors->any())
+				<ul>
+					@foreach ($errors->all() as $error)
+						<li style="color:#E74C3C">{{ $error }}</li>
+					@endforeach
+				</ul>
+		@endif
 					@if( $message == "1" )
 						<p style="color:green; font-size:15px;"> این سفر با موفقیت برای شما ثبت شده است</p>
+					@endif
+					@if( $message == "3" )
+						<p style="color:red; font-size:15px;">این سفر برای شما کنسل شد</p>
 					@endif
 					@if( $travel->cancel == 1 )
 						<p style="color:red; font-size:15px;"> این سفر کنسل شده است </p>
@@ -69,11 +79,20 @@
 							if ((($currentmonth == $month) && ($currentday <= $day)) || ($currentmonth < $month))
 							{	
 						?>
-								
+								@if(( $message == "0" ) || ( $message == "3" ))
 								<button id="submitbutton"><a href="{{route('AddTravelForUser',[$travel])}}" style="color:white; text-decoration: none;">ثبت نام در سفر <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
   <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
 </svg></a></button>
+							@endif
+							@if( $message == "1" )
+						<button id="submitbutton"><a href="{{route('CancleTrvForUser',[$travel])}}" style="color:white; text-decoration: none;">کنسل کردن سفر <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard2-minus-fill" viewBox="0 0 16 16">
+							  <path d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5Z"/>
+							  <path d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585c.055.156.085.325.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5c0-.175.03-.344.085-.5ZM6 8h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1 0-1Z"/>
+							</svg></a></button>
+					@endif
+							
+								
 								<br>
 								<br>
 								<hr>

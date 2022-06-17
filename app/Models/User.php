@@ -53,6 +53,6 @@ class User extends Authenticatable
 	
 	public function travels()
 	{
-		return $this->belongsToMany('App\Models\Travel')->withTimestamps();
+		return $this->belongsToMany('App\Models\Travel')->withPivot('role')->withTimestamps();
 	}		
 }
