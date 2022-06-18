@@ -96,8 +96,9 @@
 								<br>
 								<br>
 								<hr>
+								
 								@auth
-								@if((Auth::user()->roles->where("role",'Admin')->count() == "1") && ($travel->cancel == 0))
+								@if((Auth::user()->roles->where("role","Admin")->count() == 1) && ($travel->cancel == 0))
 								<button id="submitbutton"><a href="{{route('CancleTravel',[$travel])}}" style="color:white; text-decoration: none;" > حذف سفر <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
 </svg></a></button>

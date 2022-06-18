@@ -18,8 +18,9 @@ class TravelController extends Controller
 	 public function __construct()
     {
         $this->middleware('auth')->except(['show','index']);
-        $this->middleware('admin')->except(['show','index','AddTravelForUser']);
-		$this->middleware('leader')->except(['show','index','AddTravelForUser']);
+		$this->middleware('leaderoradmin')->except(['show','index','AddTravelForUser']);
+       // $this->middleware('admin')->except(['show','index','AddTravelForUser']);
+		// $this->middleware('leader')->except(['show','index','AddTravelForUser']);
     }
 	
     public function index()

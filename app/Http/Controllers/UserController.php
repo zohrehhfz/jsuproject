@@ -16,7 +16,7 @@ class UserController extends Controller
     {
 		$user = Auth::user();
 		$user->load('travels');
-        if (Auth::user()->roles->first()->role == "Admin") 
+        if (Auth::user()->roles->where('role','Admin')->count() == 1) 
 		{
 			$nonactive_leaders = Role::all()->where('role','=','leader');
 			$nonactive_leaders->load('user');

@@ -30,7 +30,7 @@ Route::post('/travels/update/{travel}',[TravelController::class, 'update'])->nam
 Route::get('/travels/show/{travel}' ,[TravelController::class,'show'])->name('ShowTravel');
 Route::get('/travels/index' ,[TravelController::class,'index'])->name('IndexTravel');
 Route::get('/travels/travelforyou/{travel}',[TravelController::class, 'AddTravelForUser'])->name('AddTravelForUser');
-Route::get('/travels/cancel/{travel}',[TravelController::class, 'CancleTravel'])->name('CancleTravel');
+Route::get('/travels/cancel/{travel}',[TravelController::class, 'CancleTravel'])->->middleware('leaderoradmin:$travel)->name('CancleTravel');
 
 
 Route::get('/dashboard', [UserController::class,'redirectTo'])->middleware(['auth'])->name('dashboard');
