@@ -66,6 +66,9 @@
 								<p> پایان ثبت نام : {{$travel->registerationend}}</p>
 								<p> توضیحات سفر : {{$travel->description}}</p>
 								<p> تعداد افراد ثبت نام کرده در این سفر : {{$number}}</p>
+								@if($leader_name != "empty")
+								<p> نام لیدر این سفر : {{$leader_name}}</p>
+								@endif
 								
 								<br>
 								<br>

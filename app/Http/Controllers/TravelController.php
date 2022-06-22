@@ -133,7 +133,17 @@ class TravelController extends Controller
     {
 		$number = $travel->users()->count();
 		$message = "0";
-        return view('travels.show',['travel'=>$travel , 'message'=>$message ,'number'=>$number]);
+		$r = $travel->users;
+		$leader_name="empty";
+		for($i=0; $i<$r->count() ; $i++)
+		{
+			 if($r[$i]->pivot->role == "leader")
+			 {
+				  $leader_name = $r[$i]->name;
+			 }
+		}
+		
+        return view('travels.show',['travel'=>$travel , 'message'=>$message ,'number'=>$number ,'leader_name'=>$leader_name]);
     }
 
     /**
@@ -199,8 +209,19 @@ class TravelController extends Controller
 								
 								$message = "0";
 								$number = $travel->users()->count();
-								return view('travels.show',['travel'=>$travel , 'message'=>$message ,'number'=>$number]);
+								$r = $travel->users;
+								$leader_name="empty";
+								for($i=0; $i<$r->count() ; $i++)
+								{
+									 if($r[$i]->pivot->role == "leader")
+									 {
+										  $leader_name = $r[$i]->name;
+									 }
+								}
 								
+								return view('travels.show',['travel'=>$travel , 'message'=>$message ,'number'=>$number ,'leader_name'=>$leader_name]);
+														
+														
 							}
 							else
 							{
@@ -247,7 +268,18 @@ class TravelController extends Controller
 			$message = "5";
 		
 		$number = $travel->users()->count();
-		return view('travels.show',['travel'=>$travel , 'message'=>$message ,'number'=>$number]);
+		$r = $travel->users;
+		$leader_name="empty";
+		for($i=0; $i<$r->count() ; $i++)
+		{
+			 if($r[$i]->pivot->role == "leader")
+			 {
+				  $leader_name = $r[$i]->name;
+			 }
+		}
+		
+        return view('travels.show',['travel'=>$travel , 'message'=>$message ,'number'=>$number ,'leader_name'=>$leader_name]);
+		
     }
 	public function CancleTravel(Travel $travel)
     {
