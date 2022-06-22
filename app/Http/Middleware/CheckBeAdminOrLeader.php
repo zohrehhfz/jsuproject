@@ -18,7 +18,14 @@ class CheckBeAdminOrLeader
      */
     public function handle(Request $request, Closure $next)
     {
-		return $request;
+		$u = auth()->user();
+		$a = $u->roles->where('role','Admin')->count();
+		$l = $u->roles->where('role','leader')->count();
+		
+		if(($a != 1) && ($l != 1))
+		{
+			abort(403, 'Access denied');
+		}	
         return $next($request);
     }
 }
