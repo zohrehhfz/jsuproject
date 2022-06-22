@@ -20,6 +20,7 @@ class TravelController extends Controller
         $this->middleware('auth')->except(['show','index']);
 		
         $this->middleware('adminorleader')->except(['show','index','AddTravelForUser']);
+		// $this->middleware('admin')->except(['show','index','AddTravelForUser']);
 		// $this->middleware('leader')->except(['show','index','AddTravelForUser']);
     }
 	
@@ -154,7 +155,28 @@ class TravelController extends Controller
      */
     public function edit(Travel $travel)
     {
-       return view('travels.edit',['travel'=>$travel]);
+		$user = Auth::user();
+		
+		$admin = $user->roles->where('role','Admin')->count();
+
+		$leader = $user->roles->where('role','leader')->count();
+		$r	=	"empty";
+		if($leader == 1)
+		{
+			$t = $user->travels()->where('travel_id', $travel->id)->count();
+			if($t != 0)
+			{
+				$r = $user->travels()->where('travel_id', $travel->id)->firstOrFail()->pivot->role;
+			}		
+		}
+		
+		if(($admin == 1) || ($r == "leader"))
+		{
+			return view('travels.edit',['travel'=>$travel]);
+		}
+		else
+			return redirect()->back()->withErrors(['error' => 'شما اجازه تغییر اطلاعات این سفر را ندارید']);
+       
     }
 	
 
@@ -327,7 +349,7 @@ class TravelController extends Controller
 		if(($admin == 1) || ($r == "leader"))
 		{
 		$travel->Update(["cancel"=>0]);
-        return redirect()->back()->withErrors(['error' => 'سفر فعال شد']);;
+        return redirect()->back()->withErrors(['error' => 'سفر فعال شد']);
 		}	
 		
         return redirect()->back()->withErrors(['error' => 'شما اجازه فعال کردن این سفر را ندارید']);
