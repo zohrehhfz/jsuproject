@@ -32,6 +32,7 @@ Route::get('/travels/index' ,[TravelController::class,'index'])->name('IndexTrav
 Route::get('/travels/travelforyou/{travel}',[TravelController::class, 'AddTravelForUser'])->name('AddTravelForUser');
 
 Route::get('/travels/cancel/{travel}',[TravelController::class, 'CancleTravel'])->name('CancleTravel');
+Route::get('/travels/active/{travel}',[TravelController::class, 'ActiveTravel'])->name('ActiveTravel');
 
 
 Route::get('/dashboard', [UserController::class,'redirectTo'])->middleware(['auth'])->name('dashboard');

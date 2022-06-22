@@ -38,7 +38,7 @@ class UserController extends Controller
     {
 		$user = Auth::user();
 		$r = $user->travels()->where('travel_id', $travel->id)->firstOrFail()->pivot->role;
-		if($r == "user")
+		if(($r == "user") || ($r == "leader"))
 			$user->travels()->detach($travel);
 		$message = "3";
 		$number = $travel->users()->count();

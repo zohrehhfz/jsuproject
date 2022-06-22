@@ -239,8 +239,13 @@ class TravelController extends Controller
 		$user_with_travels = $user->travels;
 		$count = $user_with_travels->where('id',$travel->id)->count();
 		if($count == 0)
+		{
 			$user->travels()->attach($travel , ['role'=>"user"]);
-		$message = "1";
+			$message = "1";
+		}
+		else
+			$message = "5";
+		
 		$number = $travel->users()->count();
 		return view('travels.show',['travel'=>$travel , 'message'=>$message ,'number'=>$number]);
     }
@@ -270,5 +275,30 @@ class TravelController extends Controller
 		
         return redirect()->back()->withErrors(['error' => 'شما اجازه حذف این سفر را ندارید']);
     }
+	public function ActiveTravel(Travel $travel)
+	{
+		$user = Auth::user();
+		
+		$admin = $user->roles->where('role','Admin')->count();
+
+		$leader = $user->roles->where('role','leader')->count();
+		$r	=	"empty";
+		if($leader == 1)
+		{
+			$t = $user->travels()->where('travel_id', $travel->id)->count();
+			if($t != 0)
+			{
+				$r = $user->travels()->where('travel_id', $travel->id)->firstOrFail()->pivot->role;
+			}		
+		}
+		
+		if(($admin == 1) || ($r == "leader"))
+		{
+		$travel->Update(["cancel"=>0]);
+        return redirect()->back()->withErrors(['error' => 'سفر فعال شد']);;
+		}	
+		
+        return redirect()->back()->withErrors(['error' => 'شما اجازه فعال کردن این سفر را ندارید']);
+	}
 	
 }
