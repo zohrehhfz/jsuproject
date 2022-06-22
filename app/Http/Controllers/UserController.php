@@ -12,6 +12,13 @@ use App\Models\Role;
 
 class UserController extends Controller
 {
+	public function __construct()
+    {
+		$this->middleware('auth');
+       // $this->middleware('admin')->except(['show','index','AddTravelForUser']);
+		// $this->middleware('leader')->except(['show','index','AddTravelForUser']);
+    }
+	
     public function redirectTo()
     {
 		$user = Auth::user();

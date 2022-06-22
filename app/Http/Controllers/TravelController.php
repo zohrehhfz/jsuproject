@@ -18,8 +18,8 @@ class TravelController extends Controller
 	 public function __construct()
     {
         $this->middleware('auth')->except(['show','index']);
-		$this->middleware('leaderoradmin')->except(['show','index','AddTravelForUser']);
-       // $this->middleware('admin')->except(['show','index','AddTravelForUser']);
+		
+        $this->middleware('admin')->except(['show','index','AddTravelForUser']);
 		// $this->middleware('leader')->except(['show','index','AddTravelForUser']);
     }
 	
@@ -246,14 +246,20 @@ class TravelController extends Controller
     }
 	public function CancleTravel(Travel $travel)
     {
+		
 		$user = Auth::user();
+		
 		$admin = $user->roles->where('role','Admin')->count();
 
 		$leader = $user->roles->where('role','leader')->count();
+		$r	=	"empty";
 		if($leader == 1)
 		{
+			$t = $user->travels()->where('travel_id', $travel->id)->count();
+			if($t != 0)
+			{
 				$r = $user->travels()->where('travel_id', $travel->id)->firstOrFail()->pivot->role;
-				
+			}		
 		}
 		
 		if(($admin == 1) || ($r == "leader"))
