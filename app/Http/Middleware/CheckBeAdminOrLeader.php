@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\Role;
+use App\Models\User;
 
 class CheckBeAdminOrLeader
 {
@@ -16,6 +18,7 @@ class CheckBeAdminOrLeader
      */
     public function handle(Request $request, Closure $next)
     {
+		return $request;
         return $next($request);
     }
 }
