@@ -23,11 +23,12 @@ class UserController extends Controller
     {
 		$user = Auth::user();
 		$user->load('travels');
+		$url = Storage::url('public/files/'.$user->photoname);
         if (Auth::user()->roles->where('role','Admin')->count() == 1) 
 		{
 			$nonactive_leaders = Role::all()->where('role','=','leader');
 			$nonactive_leaders->load('user');
-            return view('/panels/admin',['user'=>$user , 'nonactive_leaders'=>$nonactive_leaders]);
+            return view('/panels/admin',['user'=>$user , 'nonactive_leaders'=>$nonactive_leaders,'photo_url'=>$url]);
         }
 		else
 		{
