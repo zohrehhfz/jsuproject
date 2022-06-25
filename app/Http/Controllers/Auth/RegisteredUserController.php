@@ -40,21 +40,26 @@ class RegisteredUserController extends Controller
 			'phone' => ['required', 'string','min:11' ,'max:13'],
 			'birthdate' => ['required', 'string', 'max:5'],
 			'role' => 'required' ,
-			'photo' => ['required','mimes:jpg,png,jpeg,gif,svg','max:2048'] ,
+			'photo' => ['mimes:jpg,png,jpeg,gif,svg','max:2048'] ,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+		$newphotofilename = "null";
+		$photofilename = "null";
+		if($request->photo != null)
+		{
+		
+			$photofile = $request->file('photo');
+			$photofilename = $photofile->getClientOriginalName();
+			$extension = $photofile->extension();
+			$newphotofilename = sha1(time().'_'.rand(1000000000,1999999999).'_'.rand(1000000000,1999999999).'_'.$photofilename);
+			$newphotofilename = $newphotofilename.'.'.$extension;
 
-		$photofile = $request->file('photo');
-		$photofilename = $photofile->getClientOriginalName();
-		$extension = $photofile->extension();
-		$newphotofilename = sha1(time().'_'.rand(1000000000,1999999999).'_'.rand(1000000000,1999999999).'_'.$photofilename);
-		$newphotofilename = $newphotofilename.'.'.$extension;
-
-		Storage::disk('local')->putFileAs(
-			'public/files',
-			$photofile,
-			$newphotofilename
-		);
+			Storage::disk('local')->putFileAs(
+				'public/files',
+				$photofile,
+				$newphotofilename
+			);
+		}
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
