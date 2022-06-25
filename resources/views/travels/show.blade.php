@@ -9,8 +9,9 @@
 		<a href="{{ route('IndexTravel') }}" class="navbar-brand hover:text-gray-700""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-image-alt" viewBox="0 0 16 16">
   <path d="M7 2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0zm4.225 4.053a.5.5 0 0 0-.577.093l-3.71 4.71-2.66-2.772a.5.5 0 0 0-.63.062L.002 13v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4.5l-4.777-3.947z"/>
 </svg> سفرها</a>
+
                     @auth
-				@if(Auth::user()->roles->where("role",'Admin')->count() == "1")
+				@if($role == 1)
 						<a href="{{ route('CreateTravel') }}" class="navbar-brand"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
 </svg>  افزودن سفر </a>
@@ -69,7 +70,12 @@
 								@if($leader_name != "empty")
 								<p> نام لیدر این سفر : {{$leader_name}}</p>
 								@endif
-								
+								@if($role == 1)
+									<p>اعضای این سفر</p>
+								@foreach($travel->users as $u)
+									<p>{{$u->name}}</p>
+								@endforeach
+								@endif
 								<br>
 								<br>
 					<?php
@@ -105,7 +111,7 @@
 								<hr>
 								
 								@auth
-								@if((Auth::user()->roles->where("role","Admin")->count() == 1) && ($travel->cancel == 0))
+								@if(($role == 1) && ($travel->cancel == 0))
 								<button id="submitbutton"><a href="{{route('CancleTravel',[$travel])}}" style="color:white; text-decoration: none;" > حذف سفر <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
 </svg></a></button>
@@ -113,7 +119,7 @@
   <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
 </svg></a></button>
 								@endif
-								@if((Auth::user()->roles->where("role","Admin")->count() == 1) && ($travel->cancel == 1))
+								@if(($role == 1) && ($travel->cancel == 1))
 									<button id="submitbutton"><a href="{{route('ActiveTravel',[$travel])}}" style="color:white; text-decoration: none;" >فعال کردن سفر <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-square" viewBox="0 0 16 16">
   <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
   <path d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z"/>
