@@ -54,7 +54,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200" dir=rtl>
-				
+				@if($photo_url == "/storage/files/null")
+					<img src="user.gif" class="img-fluid img-circle" alt="profile photo Not Set">
+					@else
+					<img src={{$photo_url}} class="img-fluid img-circle" alt="Profile photo UnAvialable">
+					@endif
 					@if($user->roles->where("role",'leader')->count() == "1")
 						@if($user->roles->first()->active == true)
 							<p>وضعیت: فعال </p>
