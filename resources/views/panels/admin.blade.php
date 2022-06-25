@@ -53,10 +53,10 @@
 			<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 				<div class="p-6 bg-white border-b border-gray-200" dir=rtl>
 					@if($photo_url == "/storage/files/null")
-					<img src="admin.jpg" class="img-fluid img-circle" alt="Cover Image Avialable">
+					<img src="442010812_HEADPHONES_AVATAR_3D_400px.gif" class="img-fluid img-circle" alt="profile photo Not Set">
 
 					@else
-					<img src={{$photo_url}} class="img-fluid img-circle" alt="Cover Image Avialable">
+					<img src={{$photo_url}} class="img-fluid img-circle" alt="Profile photo UnAvialable">
 					@endif
 					<p style="color:green"> سلام ادمین </p>
 					<p>نام :

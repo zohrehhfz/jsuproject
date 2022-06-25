@@ -32,7 +32,7 @@ class UserController extends Controller
         }
 		else
 		{
-        return view('dashboard',['user'=>$user]);
+        return view('dashboard',['user'=>$user,'photo_url'=>$url]);
 		}
     }
 	public function CancleTrvaelForUser(Travel $travel)
