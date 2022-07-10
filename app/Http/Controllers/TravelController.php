@@ -121,6 +121,7 @@ class TravelController extends Controller
 				$leader_name = $r[$i]->name;
 			}
 		}
+		$travel->comments;
 		if (Auth::user()) {
 			$user = Auth::user();
 			$admin = $user->roles->where('role', 'Admin')->count();
@@ -128,6 +129,7 @@ class TravelController extends Controller
 			$leader = $user->roles->where('role', 'leader')->count();
 			if (($admin == 1) || ($leader == 1)) {
 				$travel->users;
+				
 				return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 1]);
 			} else {
 				return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 0]);
@@ -255,10 +257,6 @@ class TravelController extends Controller
 	 * @param  \App\Models\Travel  $travel
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy(Travel $travel)
-	{
-		//
-	}
 	
 
 	public function CancleTravel(Travel $travel)
