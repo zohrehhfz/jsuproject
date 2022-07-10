@@ -81,6 +81,15 @@
 									<p>{{$u->name}}</p>
 								@endforeach
 								@endif
+
+								@foreach($travel->comments as $c)
+								<?php 
+								$name = $c->user->name;
+								echo "<p>$name</p>";
+								?>
+									
+									<p>{{$c->message}}</p>
+								@endforeach
 								<br>
 								<br>
 					<?php
