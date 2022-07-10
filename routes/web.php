@@ -33,7 +33,7 @@ Route::middleware(['auth','adminorleader'])->group(function(){
 
 });
 Route::middleware(['auth'])->group(function(){
-	Route::get('/travels/travelforyou/{travel}',[TravelController::class, 'AddTravelForUser'])->name('AddTravelForUser');
+	Route::get('/users/travelforyou/{travel}',[UserController::class, 'AddTravelForUser'])->name('AddTravelForUser');
 	Route::get('/users/cancletravel/{travel}', [UserController::class,'CancleTrvaelForUser'])->name('CancleTrvForUser');
 
 });
