@@ -23,25 +23,31 @@ Route::get('/', function () {
 	$travels = Travel::all();
     return view('welcome',['travels'=>$travels]);
 });
-Route::get('/travels/create',[TravelController::class, 'create'])->name('CreateTravel');
-Route::post('/travels/store',[TravelController::class, 'store'])->name('StoreTravel');
-Route::get('/travels/edit/{travel}',[TravelController::class, 'edit'])->name('EditTravel');
-Route::post('/travels/update/{travel}',[TravelController::class, 'update'])->name('UpdateTravel');
+Route::middleware(['auth','adminorleader'])->group(function(){
+	Route::get('/travels/edit/{travel}',[TravelController::class, 'edit'])->name('EditTravel');
+	Route::post('/travels/update/{travel}',[TravelController::class, 'update'])->name('UpdateTravel');
+	Route::get('/travels/cancel/{travel}',[TravelController::class, 'CancleTravel'])->name('CancleTravel');
+	Route::get('/travels/active/{travel}',[TravelController::class, 'ActiveTravel'])->name('ActiveTravel');
+	Route::get('/travels/create',[TravelController::class, 'create'])->name('CreateTravel');
+	Route::post('/travels/store',[TravelController::class, 'store'])->name('StoreTravel');
+
+});
+Route::middleware(['auth'])->group(function(){
+	Route::get('/travels/travelforyou/{travel}',[TravelController::class, 'AddTravelForUser'])->name('AddTravelForUser');
+	Route::get('/users/cancletravel/{travel}', [UserController::class,'CancleTrvaelForUser'])->name('CancleTrvForUser');
+
+});
+Route::middleware(['auth','admin'])->group(function(){
+	Route::get('/leaders/active/{role}',[RoleController::class,'active'])->name('activeleader');
+	Route::get('/leaders/unactive/{role}',[RoleController::class,'unactive'])->name('unactiveleader');	
+});
 Route::get('/travels/show/{travel}' ,[TravelController::class,'show'])->name('ShowTravel');
 Route::get('/travels/index' ,[TravelController::class,'index'])->name('IndexTravel');
-Route::get('/travels/travelforyou/{travel}',[TravelController::class, 'AddTravelForUser'])->name('AddTravelForUser');
 
-Route::get('/travels/cancel/{travel}',[TravelController::class, 'CancleTravel'])->name('CancleTravel');
-Route::get('/travels/active/{travel}',[TravelController::class, 'ActiveTravel'])->name('ActiveTravel');
 
 
 Route::get('/dashboard', [UserController::class,'redirectTo'])->middleware(['auth'])->name('dashboard');
-Route::get('/users/cancletravel/{travel}', [UserController::class,'CancleTrvaelForUser'])->name('CancleTrvForUser');
 
-Route::get('/leaders/active/{role}',[RoleController::class,'active'])->name('activeleader');
-Route::get('/leaders/unactive/{role}',[RoleController::class,'unactive'])->name('unactiveleader');
-
-Route::get('/travels/travelforyou/{travel}',[TravelController::class, 'AddTravelForUser'])->name('AddTravelForUser');
 
 
 /* Route::get('/travels/cancel/{travel}',[TravelController::class, 'CancleTravel'])->->middleware('leaderoradmin:$travel')->name('CancleTravel');
