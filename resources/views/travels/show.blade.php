@@ -45,7 +45,12 @@
 						@if ($errors->any())
 				<ul>
 					@foreach ($errors->all() as $error)
+						@if($error == "سفر فعال شد")
+						<li style="color:green">{{ $error }}</li>
+						@else
 						<li style="color:#E74C3C">{{ $error }}</li>
+						@endif
+						
 					@endforeach
 				</ul>
 		@endif
@@ -55,7 +60,7 @@
 					@if( $message == "1" )
 						<p style="color:green; font-size:15px;"> این سفر با موفقیت برای شما ثبت شده است</p>
 					@endif
-					@if( $message == "3" )
+					@if(( $message == "3" ) && ($travel->cancel != 1))
 						<p style="color:red; font-size:15px;">این سفر برای شما کنسل شد</p>
 					@endif
 					@if( $travel->cancel == 1 )
