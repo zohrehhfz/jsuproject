@@ -19,8 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('from');
 			$table->foreign('from')->references('id')->on('users')->cascadeOnDelete();
 
-            $table->unsignedBigInteger('reply')->nullable();
-			$table->foreign('reply')->references('id')->on('users')->cascadeOnDelete();
+            $table->unsignedBigInteger('parent_id')->nullable();
+			$table->foreign('parent_id')->references('id')->on('comments')->cascadeOnDelete();
            
             $table->unsignedBigInteger('travel_id');
 			$table->foreign('travel_id')->references('id')->on('travels')->cascadeOnDelete();
