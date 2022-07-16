@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use App\Models\Travel;
 use App\Models\User;
 
@@ -129,7 +131,7 @@ class TravelController extends Controller
 			$leader = $user->roles->where('role', 'leader')->count();
 			if (($admin == 1) || ($leader == 1)) {
 				$travel->users;
-				
+
 				return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 1]);
 			} else {
 				return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 0]);
@@ -180,6 +182,7 @@ class TravelController extends Controller
 			'destination' => 'required|string|max:255',
 			'traveltime' => 'required',
 			'registerationstart' => 'required',
+			'photo' => ['mimes:jpg,png,jpeg,gif,svg', 'max:2048'],
 			'registerationend' => 'required',
 		]);
 		//barresi baze zamani
@@ -208,11 +211,32 @@ class TravelController extends Controller
 			if ((($monthend == $monthstart) && ($daystart <= $dayend)) || ($monthstart < $monthend)) {
 				if ($yearend <= $yeartraveltime) {
 					if ((($monthend == $monthtraveltime) && ($dayend <= $daytraveltime)) || ($monthend < $monthtraveltime)) {
-						$travel->Update([
-							"destination" => $request->destination, "traveltime" => $request->traveltime,
-							'registerationstart' => $request->registerationstart, 'registerationend' => $request->registerationend, "description" => $request->description, "cancel" => 0
-						]);
+						$newphotofilename = "null";
+						$photofilename = "null";
+						if ($request->photo != null) {
 
+							$photofile = $request->file('photo');
+							$photofilename = $photofile->getClientOriginalName();
+							$extension = $photofile->extension();
+							$newphotofilename = sha1(time() . '_' . rand(1000000000, 1999999999) . '_' . rand(1000000000, 1999999999) . '_' . $photofilename);
+							$newphotofilename = $newphotofilename . '.' . $extension;
+
+							Storage::disk('local')->putFileAs(
+								'public/travels',
+								$photofile,
+								$newphotofilename
+							);
+						}
+						
+						DB::table('travels')->where('id',$travel->id)->update(array(
+						
+							"photoname" => $newphotofilename,
+							"orginalphotoname" => $photofilename,
+							"destination" => $request->destination,
+							"traveltime" => $request->traveltime,
+							'registerationstart' => $request->registerationstart, 'registerationend' => $request->registerationend,
+							"description" => $request->description, "cancel" => 0
+						));
 						$message = "0";
 						$number = $travel->users()->count();
 						$r = $travel->users;
@@ -257,7 +281,7 @@ class TravelController extends Controller
 	 * @param  \App\Models\Travel  $travel
 	 * @return \Illuminate\Http\Response
 	 */
-	
+
 
 	public function CancleTravel(Travel $travel)
 	{
