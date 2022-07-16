@@ -67,6 +67,18 @@
 		@if( $travel->cancel == 1 )
 		<p style="color:red; font-size:15px;"> این سفر کنسل شده است </p>
 		@endif
+		<br>
+		@if($photo_url == "/storage/travels/")
+		<figure>
+			<img src="/notfound.jpg" class="img-fluid" style="margin:auto; width:25%; height:25%;" alt="profile photo Not Set">
+			<figcaption style="font-size: 14px;">تصویر سفر یافت نشد</figcaption>
+		</figure>
+
+		@else
+		<img src={{$photo_url}} class="img-fluid img-circle2" alt="Profile photo UnAvialable">
+		@endif
+		<br>
+		<br>
 		<p> مقصد: {{$travel->destination}}</p>
 		<p>زمان سفر: {{$travel->traveltime}}</p>
 		<p> شروع ثبت نام: {{$travel->registerationstart}}</p>
