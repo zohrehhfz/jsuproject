@@ -70,7 +70,7 @@
 		<br>
 		@if($photo_url == "/storage/travels/")
 		<figure>
-			<img src="/notfound.jpg" class="img-fluid" style="margin:auto; width:25%; height:25%;" alt="profile photo Not Set">
+			<img src="/travel-agency.jpg" class="img-fluid" style="margin:auto; width:25%; height:25%;" alt="profile photo Not Set">
 			<figcaption style="font-size: 14px;">تصویر سفر یافت نشد</figcaption>
 		</figure>
 
