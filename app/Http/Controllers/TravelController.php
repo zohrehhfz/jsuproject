@@ -123,7 +123,10 @@ class TravelController extends Controller
 				$leader_name = $r[$i]->name;
 			}
 		}
+
 		$travel->comments;
+		$url = Storage::url('public/travels/' . $travel->photoname);
+
 		if (Auth::user()) {
 			$user = Auth::user();
 			$admin = $user->roles->where('role', 'Admin')->count();
@@ -132,12 +135,12 @@ class TravelController extends Controller
 			if (($admin == 1) || ($leader == 1)) {
 				$travel->users;
 
-				return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 1]);
+				return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 1,'photo_url' => $url]);
 			} else {
-				return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 0]);
+				return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 0,'photo_url' => $url]);
 			}
 		} else {
-			return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 0]);
+			return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 0,'photo_url' => $url]);
 		}
 	}
 
