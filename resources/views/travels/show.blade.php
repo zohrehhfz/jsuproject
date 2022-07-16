@@ -75,7 +75,7 @@
 		</figure>
 
 		@else
-		<img src={{$photo_url}} class="img-fluid img-circle2" alt="Profile photo UnAvialable">
+		<img src={{$photo_url}} class="img-fluid img-circle2" style="margin:auto; width:60%; height:60%;" alt="Profile photo UnAvialable">
 		@endif
 		<br>
 		<br>
@@ -163,9 +163,7 @@
 						$name = $user->name;
 						if ($photo_url == "/storage/files/null") {
 						?>
-							<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
-								<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-							</svg>
+							<img src="/user.gif" class="img-fluid img-circle" style="margin-right:0vw; width:40px; height:40px;"alt="profile photo Not Set">
 						<?php
 						} else {
 						?>
