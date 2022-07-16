@@ -52,11 +52,11 @@ class TravelController extends Controller
 			'traveltime' => 'required',
 			'registerationstart' => 'required',
 			'registerationend' => 'required',
+			'photo' => ['mimes:jpg,png,jpeg,gif,svg', 'max:2048']
 		]);
 		//barresi baze zamani
-		$t = Travel::all()->where('destination', $request->destination);
-		$c = $t->where('traveltime', $request->traveltime)->count();
-		if ($c > 0) {
+		$t = Travel::all()->where('destination', $request->destination)->where('traveltime', $request->traveltime)->count();
+		if ($t > 0) {
 			return redirect()->back()->withErrors(['error' => 'این سفر قبلا ثبت شده است']);
 		}
 		$rs = strtotime($request->registerationstart);
@@ -83,9 +83,29 @@ class TravelController extends Controller
 			if ((($monthend == $monthstart) && ($daystart <= $dayend)) || ($monthstart < $monthend)) {
 				if ($yearend <= $yeartraveltime) {
 					if ((($monthend == $monthtraveltime) && ($dayend <= $daytraveltime)) || ($monthend < $monthtraveltime)) {
+						$newphotofilename = "null";
+						$photofilename = "null";
+						if ($request->photo != null) {
+
+							$photofile = $request->file('photo');
+							$photofilename = $photofile->getClientOriginalName();
+							$extension = $photofile->extension();
+							$newphotofilename = sha1(time() . '_' . rand(1000000000, 1999999999) . '_' . rand(1000000000, 1999999999) . '_' . $photofilename);
+							$newphotofilename = $newphotofilename . '.' . $extension;
+
+							Storage::disk('local')->putFileAs(
+								'public/files',
+								$photofile,
+								$newphotofilename
+							);
+						}
 						$travel = Travel::Create([
 							"destination" => $request->destination, "traveltime" => $request->traveltime,
-							'registerationstart' => $request->registerationstart, 'registerationend' => $request->registerationend, "description" => $request->description, "cancel" => 0
+							'registerationstart' => $request->registerationstart,
+							'registerationend' => $request->registerationend,
+							"description" => $request->description, "cancel" => 0,
+							'photoname' => $newphotofilename,
+							'orginalphotoname' => $photofilename,
 						]);
 
 						$user = Auth::user();
@@ -135,12 +155,12 @@ class TravelController extends Controller
 			if (($admin == 1) || ($leader == 1)) {
 				$travel->users;
 
-				return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 1,'photo_url' => $url]);
+				return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 1, 'photo_url' => $url]);
 			} else {
-				return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 0,'photo_url' => $url]);
+				return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 0, 'photo_url' => $url]);
 			}
 		} else {
-			return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 0,'photo_url' => $url]);
+			return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 0, 'photo_url' => $url]);
 		}
 	}
 
@@ -230,9 +250,9 @@ class TravelController extends Controller
 								$newphotofilename
 							);
 						}
-						
-						DB::table('travels')->where('id',$travel->id)->update(array(
-						
+
+						DB::table('travels')->where('id', $travel->id)->update(array(
+
 							"photoname" => $newphotofilename,
 							"orginalphotoname" => $photofilename,
 							"destination" => $request->destination,
@@ -257,12 +277,17 @@ class TravelController extends Controller
 							$leader = $user->roles->where('role', 'leader')->count();
 							if (($admin == 1) || ($leader == 1)) {
 								$travel->users;
-								return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 1]);
+								$travel->comments;
+								$url = Storage::url('public/travels/' . $travel->photoname);
+								return view('travels.show', ['travel' => $travel, 'message' => $message,
+								 'number' => $number, 'leader_name' => $leader_name, 'role' => 1,'photo_url' => $url]);
 							} else {
-								return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 0]);
+								return view('travels.show', ['travel' => $travel, 'message' => $message,
+								 'number' => $number, 'leader_name' => $leader_name, 'role' => 0,'photo_url' => $url]);
 							}
 						} else {
-							return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 0]);
+							return view('travels.show', ['travel' => $travel, 'message' => $message,
+							 'number' => $number, 'leader_name' => $leader_name, 'role' => 0,'photo_url' => $url]);
 						}
 					} else {
 						return redirect()->back()->withErrors(['error' => 'تاریخ ها معتبر نیستند']);
