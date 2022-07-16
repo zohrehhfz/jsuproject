@@ -97,19 +97,70 @@
 		if ((($currentmonth == $month) && ($currentday <= $day)) || ($currentmonth < $month)) {
 
 	?>
+			<div class="container">
 			<div class="div1 divhover">
-				<a href="{{route('ShowTravel',[$travel])}}" style="color:black;"> مقصد: {{$travel->destination}} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
-						<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-						<path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
-					</svg></a>
+			<div class="row">
+				<div class="col-sm">
+					<?php
+					$photo_url = Storage::url('public/travels/' . $travel->photoname);
+					if ($photo_url == "/storage/travels/") {
+					?>
+						<img src="/travel-agency.jpg" class="img-fluid img-circle2" style="margin:auto; width:85%; height:85%;" alt=" photo Not Set">
+					<?php
+					} else {
+					?>
+						<img src="{{$photo_url}}" class="img-fluid img-circle2" alt=" photo UnAvialable" style="margin:auto; width:85%; height:85%;">
+
+					<?php
+					}
+
+					?>
+				</div>
+				<div class="col-sm">
+					<a href="{{route('ShowTravel',[$travel])}}" style="color:black;"> مقصد: {{$travel->destination}}</a>
+					<br>
+					<br>
+
+					<p>زمان سفر: {{$travel->traveltime}}</p>
+
+					<p> شروع ثبت نام: {{$travel->registerationstart}}</p>
+					<p> پایان ثبت نام : {{$travel->registerationend}}</p>
+					<p> توضیحات سفر : {{$travel->description}}</p>
+					@if( $travel->cancel == 1 )
+					<p style="color:red; font-size:15px;"> این سفر کنسل شده است </p>
+					@endif
+					<?php
+					$time = strtotime($travel->registerationend);
+					$day = date('d', $time);
+					$month = date('m', $time);
+					$year = date('Y', $time);
+
+					$currentyear = date("Y");
+					$currentmonth = date("m");
+					$currentday = date("d");
+					if (($currentyear <= $year) && ($travel->cancel == 0)) {
+						if ((($currentmonth == $month) && ($currentday <= $day)) || ($currentmonth < $month)) {
+
+					?>
+
+							<button id="submitbutton"><a href="{{route('ShowTravel',[$travel])}}" style="color: #E2F1F1; text-decoration:none;">ثبت نام در سفر <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+										<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+										<path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+									</svg>
+								</a></button>
+
+				</div>
 				<br>
 				<br>
-				<p>زمان سفر : {{$travel->traveltime}}</p>
-				<p> شروع ثبت نام : {{$travel->registerationstart}}</p>
-				<p> پایان ثبت نام : {{$travel->registerationend}}</p>
-				<p> توضیحات سفر : {{$travel->description}}</p>
-				<hr style="height:1px;border-width:0;color:gray;background-color:gray">
+				
+		<?php
+						}
+					}
+
+		?>
 			</div>
+			</div>
+		</div>
 			<br>
 			<br>
 	<?php
