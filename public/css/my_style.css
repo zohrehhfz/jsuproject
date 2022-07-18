@@ -51,18 +51,6 @@ a:hover {
     margin: 0vh 25vw 0vh 0vw;
 }
 
-#submitbutton {
-    border-radius: 20px;
-    border: none;
-    font-size: 1em;
-    width: auto;
-    background-color: #289e9e;
-}
-
-#submitbutton:hover {
-    color: #09494b;
-}
-
 .divhover {
     display: flex;
     align-items: center;
@@ -234,6 +222,20 @@ button {
 
 button:hover {
     opacity: 1;
+}
+
+#submitbutton {
+    border-radius: 20px;
+    border: none;
+    font-size: 1em;
+    width: auto;
+    background-color: #289e9e;
+    padding: 5px 5px;
+    margin: auto;
+}
+
+#submitbutton:hover {
+    color: #09494b;
 }
 
 
