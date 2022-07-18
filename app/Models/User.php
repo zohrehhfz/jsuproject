@@ -54,5 +54,9 @@ class User extends Authenticatable
 	public function travels()
 	{
 		return $this->belongsToMany('App\Models\Travel')->withPivot('role')->withTimestamps();
+	}
+    public function certificates()
+	{
+		return $this->hasOne('App\Models\Leaderattribute');
 	}		
 }
