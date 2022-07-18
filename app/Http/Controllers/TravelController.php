@@ -269,16 +269,17 @@ class TravelController extends Controller
 								$leader_name = $r[$i]->name;
 							}
 						}
+						$url = Storage::url('public/travels/' . $travel->photoname);
 
 						if (Auth::user()) {
 							$user = Auth::user();
 							$admin = $user->roles->where('role', 'Admin')->count();
 
 							$leader = $user->roles->where('role', 'leader')->count();
+
 							if (($admin == 1) || ($leader == 1)) {
 								$travel->users;
 								$travel->comments;
-								$url = Storage::url('public/travels/' . $travel->photoname);
 								return view('travels.show', ['travel' => $travel, 'message' => $message,
 								 'number' => $number, 'leader_name' => $leader_name, 'role' => 1,'photo_url' => $url]);
 							} else {
