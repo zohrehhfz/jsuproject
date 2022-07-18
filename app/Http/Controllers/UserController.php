@@ -33,6 +33,18 @@ class UserController extends Controller
 			return view('dashboard', ['user' => $user, 'photo_url' => $url]);
 		}
 	}
+	/**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function edit()
+    {
+		$user = Auth::user();
+		return view('panels.upadatepanel',['user'=>$user]);
+
+    }
 	public function CancleTrvaelForUser(Travel $travel)
 	{
 		$user = Auth::user();
