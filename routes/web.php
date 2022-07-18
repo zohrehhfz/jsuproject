@@ -35,7 +35,7 @@ Route::middleware(['auth','adminorleader'])->group(function(){
 Route::middleware(['auth'])->group(function(){
 	Route::get('/users/travelforyou/{travel}',[UserController::class, 'AddTravelForUser'])->name('AddTravelForUser');
 	Route::get('/users/cancletravel/{travel}', [UserController::class,'CancleTrvaelForUser'])->name('CancleTrvForUser');
-
+	Route::get('/users/changeinfo',[UserController::class, 'edit'])->name('UpdateUserInfo');
 });
 Route::middleware(['auth','admin'])->group(function(){
 	Route::get('/leaders/active/{role}',[RoleController::class,'active'])->name('activeleader');
