@@ -13,27 +13,27 @@
             <div>
                 <x-label for="name" :value="__('نام')" />
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus/>
             </div>
 			
             <!-- Email Address -->
             <div class="mt-4">
                 <x-label for="email" :value="__('ایمیل')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required style="margin-left: 9px;"/>
             </div>
 			
 			<!-- phone -->
             <div class="mt-4">
                 <x-label for="phone" :value="__('شماره تلفن')" />
 
-                <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required />
+                <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required style="margin-left: 45px;"/>
             </div>
 			<!-- year of birth -->
             <div class="mt-4">
                 <x-label for="birthdate" :value="__('سال تولد')" />
 
-                <x-input id="birthdate" class="block mt-1 w-full" type="text" name="birthdate" :value="old('birthdate')" required />
+                <x-input id="birthdate" class="block mt-1 w-full" type="text" name="birthdate" :value="old('birthdate')" required style="margin-left: 20px;"/>
             </div>
 				
 			<div class="mt-4">
@@ -51,7 +51,7 @@
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
-                                required autocomplete="new-password" />
+                                required autocomplete="new-password" style="margin-left: 20px;"/>
             </div>
 
             <!-- Confirm Password -->
@@ -60,7 +60,7 @@
 
                 <x-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
-                                name="password_confirmation" required />
+                                name="password_confirmation" required style="margin-left: 40px;"/>
             </div>
 
             <div class="flex items-center justify-end mt-4">
@@ -69,7 +69,7 @@
                 </a>
 
                 <x-button id="submitbutton">
-                    {{ __('Register') }}
+                    {{ __('ثبت نام') }}
                 </x-button>
             </div>
         </form>
