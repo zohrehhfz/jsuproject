@@ -61,7 +61,7 @@
 						</svg>
 						برای اینکه حساب شما به عنوان لیدر فعال شود مدرک خود را آپلود کنید.
 						<div style="margin:auto">
-							<button id="submitbutton" style="margin-left: -30vw;"><a href="{{route('UpdateUserInfo')}}" style="color:white; text-decoration: none; "> به روز رسانی حساب</a></button>
+							<button id="submitbutton" style="margin-left: -30vw;"><a href="{{route('ChangeUserInfo')}}" style="color:white; text-decoration: none; "> به روز رسانی حساب</a></button>
 						</div>
 					</div>
 
