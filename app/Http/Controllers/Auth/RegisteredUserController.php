@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Leaderattribute;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -79,12 +80,16 @@ class RegisteredUserController extends Controller
 			'role' => $request->role ,
 			'active' => $number
 		]);
+		Leaderattribute::create([
+			'user_id' => $user->id,
+		]);
 		}
 		
 		Role::create([
 			'user_id' => $user->id,
 			'role' => "user" ,
 		]);
+		
         event(new Registered($user));
 
         Auth::login($user);
