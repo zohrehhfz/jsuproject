@@ -186,6 +186,15 @@ a:hover {
     margin: 5vh 12vw 0vh 0vw;
 }
 
+.divupload {
+    text-align: center;
+    border-radius: 20px;
+    width: 75%;
+    background-color: white;
+    margin: 5vh 12vw 0vh 0vw;
+    box-shadow: 0 5px 35px 0px rgba(0, 0, 0, .1);
+}
+
 .li2 {
     padding-left: 1vw;
     font-size: 1.2em;
