@@ -209,6 +209,20 @@ a:hover {
     box-shadow: 10px 10px 5px #9fd4da;
 }
 
+.certificatebutton {
+    border-radius: 20px;
+    border: none;
+    font-size: 1em;
+    width: auto;
+    background-color: #289e9e;
+    padding: 5px 5px;
+    padding-bottom: 10px;
+}
+
+.mypen {
+    margin-top: -3vh;
+}
+
 .sub_cm {
     background-color: rgb(255, 255, 255);
     border-radius: 20px;
