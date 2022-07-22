@@ -110,6 +110,12 @@ class UserController extends Controller
 		$url = Storage::url('public/files/' . $user->photoname);
 		return view('dashboard', ['user' => $user, 'photo_url' => $url]);
 	}
+	public function certificate()
+	{
+		$user = User::find(Auth::user()->id);
+		$name = $user->certificates()->first()->orginalcertificatename;
+		return Storage::download('public/certificates/'. $user->certificates()->first()->certificatename,$name);
+	}
 	public function CancleTrvaelForUser(Travel $travel)
 	{
 		$user = Auth::user();
