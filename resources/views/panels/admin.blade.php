@@ -82,7 +82,7 @@
 				<div class="p-6 bg-white border-b border-gray-200" dir=rtl>
 					<p>سفرهای شما :</p>
 					@foreach ($user->travels as $travel)
-					<div class="div1" style="margin: auto; box-shadow: 5px 5px 10px 5px #C296F9;">
+					<div class="div1" style="margin: auto; box-shadow: 5px 5px 10px 5px #A774E7;">
 						<a href="{{route('ShowTravel',[$travel])}}"> مقصد: {{$travel->destination}}</a>
 						زمان سفر: {{$travel->traveltime}}
 						@if($travel->cancel == 1)
