@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function(){
 Route::middleware(['auth','admin'])->group(function(){
 	Route::get('/leaders/active/{role}',[RoleController::class,'active'])->name('activeleader');
 	Route::get('/leaders/unactive/{role}',[RoleController::class,'unactive'])->name('unactiveleader');	
+	Route::get('/admin/seecertificate/{user}',[UserController::class, 'AdminSeeCertificate'])->name('AdminSeeCertificate');
 });
 Route::get('/travels/show/{travel}' ,[TravelController::class,'show'])->name('ShowTravel');
 Route::get('/travels/index' ,[TravelController::class,'index'])->name('IndexTravel');
