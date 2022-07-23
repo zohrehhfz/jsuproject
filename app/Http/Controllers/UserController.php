@@ -116,6 +116,12 @@ class UserController extends Controller
 		$name = $user->certificates()->first()->orginalcertificatename;
 		return Storage::download('public/certificates/'. $user->certificates()->first()->certificatename,$name);
 	}
+	public function AdminSeeCertificate(User $user)
+	{
+		$name = $user->certificates()->first()->orginalcertificatename;
+		return Storage::download('public/certificates/'. $user->certificates()->first()->certificatename,$name);
+	}
+
 	public function CancleTrvaelForUser(Travel $travel)
 	{
 		$user = Auth::user();
