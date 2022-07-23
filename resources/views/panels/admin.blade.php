@@ -51,44 +51,47 @@
 	<div class="py-12" style="font-size:18px;">
 		<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 			<div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-				<div class="p-6 bg-white border-b border-gray-200" dir=rtl>
+				<div class="p-6 bg-white border-b border-gray-200" dir=rtl style="margin: auto;">
 					@if($photo_url == "/storage/files/null")
 					<img src="442010812_HEADPHONES_AVATAR_3D_400px.gif" class="img-fluid img-circle" alt="profile photo Not Set">
 
 					@else
 					<img src={{$photo_url}} class="img-fluid img-circle" alt="Profile photo UnAvialable">
 					@endif
-					<p style="color:green"> سلام ادمین </p>
-					<p>نام :
-						{{$user->name}}
-					</p>
-					<p> ایمیل :
-						{{$user->email}}
-					</p>
-					<p> شماره تماس :
-						{{$user->phone}}
-					</p>
-					<p> سال تولد :
-						{{$user->birthdate}}
-					</p>
-					<p> حساب در تاریخ
-						{{$user->created_at}}
-						ایجاد شده است
-					</p>
+					<div class="div1" style="margin: auto; box-shadow: 5px 5px 10px 5px #87E774;">
+						<p style="color:green"> سلام ادمین </p>
+						<p>نام :
+							{{$user->name}}
+						</p>
+						<p> ایمیل :
+							{{$user->email}}
+						</p>
+						<p> شماره تماس :
+							{{$user->phone}}
+						</p>
+						<p> سال تولد :
+							{{$user->birthdate}}
+						</p>
+						<p> حساب در تاریخ
+							{{$user->created_at}}
+							ایجاد شده است
+						</p>
+					</div>
 				</div>
 				@if($user->travels->count() != 0)
 				<div class="p-6 bg-white border-b border-gray-200" dir=rtl>
 					<p>سفرهای شما :</p>
 					@foreach ($user->travels as $travel)
-					<a href="{{route('ShowTravel',[$travel])}}"> مقصد: {{$travel->destination}}</a>
-					<p>زمان سفر: {{$travel->traveltime}}</p>
-					<p> شروع ثبت نام: {{$travel->registerationstart}}</p>
-					<p> پایان ثبت نام : {{$travel->registerationend}}</p>
-					<p> توضیحات سفر : {{$travel->description}}</p>
-					@if($travel->cancel == 1)
-					<p style="color:red; font-size:18px;"> این سفر کنسل شده است </p>
-					@endif
-					<hr style="height:2px;border-width:0;color:gray;background-color:gray">
+					<div class="div1" style="margin: auto; box-shadow: 5px 5px 10px 5px #C296F9;">
+						<a href="{{route('ShowTravel',[$travel])}}"> مقصد: {{$travel->destination}}</a>
+						زمان سفر: {{$travel->traveltime}}
+						@if($travel->cancel == 1)
+						<p style="color:red; font-size:18px;"> این سفر کنسل شده است </p>
+						@endif
+
+					</div>
+					<br>
+
 					@endforeach
 				</div>
 				@endif
@@ -97,12 +100,27 @@
 				<div class="p-6 bg-white border-b border-gray-200" dir=rtl>
 					<p>لیدرهای ثبت نام کرده :</p>
 					@foreach ($nonactive_leaders as $leader)
-					<p>نام :{{$leader->user->name}}</p>
-					@if($leader->active == 1)
-					<a href="{{route('unactiveleader',[$leader])}}"><button id="submitbutton">غیر فعال کردن</button></a>
-					@else
-					<a href="{{route('activeleader',[$leader])}}"><button id="submitbutton">فعال کردن</button></a>
-					@endif
+					<div class="div1">
+						<p style="display:inline-block; margin-left:30vw;">نام :{{$leader->user->name}}</p>
+						@if($leader->active == 1)
+						<a href="{{route('unactiveleader',[$leader])}}"><button id="submitbutton">غیر فعال کردن</button></a>
+						@else
+						<a href="{{route('activeleader',[$leader])}}"><button id="submitbutton">فعال کردن</button></a>
+						@endif
+
+
+						@if($leader->user->certificates->certificatename != NULL)
+						<button class="certificatebutton"><a href="{{route('AdminSeeCertificate',[$leader->user])}}" style="color:white; text-decoration: none;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;نمایش مدرک <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-award-fill mypen" viewBox="0 0 16 16">
+									<path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864 8 0z" />
+									<path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z" />
+								</svg></a></button>
+						@else
+						<div style="bg-dark color:white; text-decoration: none; display:inline-block"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;بدون مدرک <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill mypen" viewBox="0 0 16 16">
+								<path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+							</svg></div>
+
+						@endif
+					</div>
 					@endforeach
 				</div>
 				@endif
