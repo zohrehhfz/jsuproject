@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Travel;
 use App\Models\Role;
+use App\Models\Leaderattribute;
 
 class UserController extends Controller
 {
@@ -93,13 +94,26 @@ class UserController extends Controller
 				$certificatefile,
 				$newcertificatefilename
 			);
+			if($user->certificates()->count() == 0)
+			{
+				Role::create([
+					'user_id' => $user->id,
+					'role' => "leader" ,
+					'active' => 0
+				]);
 
+				Leaderattribute::create([
+					'user_id' => $user->id,
+					'certificatename' => NULL , 
+					'orginalcertificatename' => NULL
+				]);
+			}
 			DB::table('leaderattributes')->where('user_id', $user->id)->update(array(
 				"certificatename" => $newcertificatefilename,
 				"orginalcertificatename" => $certificatefilename,
 			));
 		}
-
+		
 		DB::table('users')->where('id', $user->id)->update(array(
 			'name' => $request->name,
 			'email' => $request->email,
