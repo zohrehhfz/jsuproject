@@ -110,6 +110,9 @@
 							{{$user->created_at}}
 							ایجاد شده است
 						</p>
+
+						<button id="submitbutton" style="margin:auto;"><a href="{{route('ChangeUserInfo')}}" style="color:white; text-decoration: none; "> به روز رسانی حساب</a></button>
+
 					</div>
 				</div>
 				@if($user->travels->count() != 0)
