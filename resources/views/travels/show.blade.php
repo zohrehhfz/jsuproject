@@ -42,7 +42,7 @@
 </nav>
 
 <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-	<div class="div1">
+	<div class="div1" style="width:70%; margin:auto;">
 		@if ($errors->any())
 		<ul>
 			@foreach ($errors->all() as $error)
@@ -130,8 +130,8 @@
 				@auth
 				@if(($role == 1) && ($travel->cancel == 0))
 				<button id="submitbutton" onclick="document.getElementById('id01').style.display='block'">حذف سفر <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
-							<path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z" />
-						</svg></button>
+						<path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z" />
+					</svg></button>
 				<div id="id01" class="modal">
 					<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
 					<form class="modal-content" method="get" action="{{route('CancleTravel',[$travel])}}">
@@ -147,7 +147,7 @@
 						</div>
 					</form>
 				</div>
-				
+
 				<button id="submitbutton"><a href="{{ route('EditTravel',[$travel]) }}" style="color:white; text-decoration: none;"> تغییر اطلاعات سفر <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
 							<path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
 						</svg></a></button>
@@ -164,45 +164,80 @@
 			}
 		}
 		?>
-		<div class="comments">
-
-			<br>
-			<br>
-			@foreach($travel->comments as $c)
-			<div class="sub_cm">
-				<div class="row">
-					<div class="col">
-						<?php
-
-						$user = $c->user;
-						$photo_url = Storage::url('public/files/' . $user->photoname);
-						$name = $user->name;
-						if ($photo_url == "/storage/files/null") {
-						?>
-							<img src="/user.gif" class="img-fluid img-circle" style="margin-right:0vw; width:40px; height:40px;" alt="profile photo Not Set">
-						<?php
-						} else {
-						?>
-							<img src="{{$photo_url}}" class="img-fluid img-circle" alt="Profile photo UnAvialable" style="margin-right:0vw; width:30px; height:30px;">
-
-						<?php
-						}
-
-						?>
-					</div>
-					<div class="col-11">
-						<p style="font-size:1vw;">{{$name}}:</p>
-						<p style="font-size:0.99vw;">{{$c->message}}</p>
-					</div>
-
-				</div>
-
-			</div>
-			@endforeach
-			<br>
-			<br>
-		</div>
 	</div>
+	<br>
+	<br>
+	<div class="comments container" style="margin: auto;">
+
+		<br>
+		<div class="sub_cm" style="background: none;">
+			<div class="row">
+				<div style="text-align: right;">
+					<h6> <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-collection-fill" viewBox="0 0 16 16">
+							<path d="M0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zM2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1z" />
+						</svg> &nbsp; نظرات</h6>
+				</div>
+			</div>
+		</div>
+		@if($travel->comments->count() == 0)
+		<div class="sub_cm">
+			<div class="row">
+				<div class="col">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-text-fill" viewBox="0 0 16 16">
+						<path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM4.5 5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7zm0 2.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7zm0 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4z" />
+					</svg>
+				</div>
+				<div class="col-11">
+					اولین نفری باشید که برای این سفر نظری ثبت می‌کند.
+				</div>
+			</div>
+		</div>
+		@else
+		@foreach($travel->comments as $c)
+		<div class="sub_cm">
+			<div class="row">
+				<div class="col">
+					<?php
+					$user = $c->user;
+					$photo_url = Storage::url('public/files/' . $user->photoname);
+					$name = $user->name;
+					if ($photo_url == "/storage/files/null") {
+					?>
+						<img src="/user.gif" class="img-fluid img-circle" style="margin-right:0vw; width:40px; height:40px;" alt="profile photo Not Set">
+					<?php
+					} else {
+					?>
+						<img src="{{$photo_url}}" class="img-fluid img-circle" alt="Profile photo UnAvialable" style="margin-right:0vw; width:30px; height:30px;">
+					<?php
+					}
+					?>
+				</div>
+				<div class="col-11">
+					<p style="font-size:1vw;">{{$name}}:</p>
+					<p style="font-size:0.99vw;">{{$c->message}}</p>
+				</div>
+			</div>
+		</div>
+		@endforeach
+		@endif
+		<div class="sub_cm">
+			<div class="row">
+				<form id="commentform">
+					<textarea name="message" id="commentform" cols="90" rows="1" placeholder="نظر خود را درباره این سفر بنویسید." style="border: none;"></textarea>
+
+					<button id="submitbutton" type="submit" style="color:white; width:auto; display:inline; margin:auto;"> ثبت <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+							<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+							<path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+						</svg></button>
+				</form>
+			</div>
+		</div>
+		<br>
+		<br>
+	</div>
+	<br>
+	<br>
+
 	<br>
 	<br>
 
