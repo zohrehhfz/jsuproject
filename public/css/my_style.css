@@ -202,9 +202,9 @@ a:hover {
 }
 
 .comments {
-    background-color: rgb(240, 248, 248);
+    background-color: rgb(213, 231, 231);
     border-radius: 20px;
-    width: 95%;
+    width: 70%;
     margin: 5vh 2vw 0vh 0vw;
     box-shadow: 10px 10px 5px #9fd4da;
 }
