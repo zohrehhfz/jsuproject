@@ -10,7 +10,6 @@ class Comment extends Model
     use HasFactory;
     protected $fillable = [
         "from",
-        "reply",
         "travel_id",
         "message",
     ];
