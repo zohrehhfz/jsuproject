@@ -222,9 +222,10 @@
 		@endif
 		<div class="sub_cm">
 			<div class="row">
-				<form id="commentform">
+				<form id="commentform" action="{{route('SetComment')}}" method="post">
+					@csrf
 					<textarea name="message" id="commentform" cols="90" rows="1" placeholder="نظر خود را درباره این سفر بنویسید." style="border: none;"></textarea>
-
+					<input type="hidden" id="travel" name="travel" value={{ $travel->id }}>
 					<button id="submitbutton" type="submit" style="color:white; width:auto; display:inline; margin:auto;"> ثبت <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-double-left" viewBox="0 0 16 16">
 							<path fill-rule="evenodd" d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
 							<path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
