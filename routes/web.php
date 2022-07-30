@@ -38,6 +38,9 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('/users/changeinfo',[UserController::class, 'edit'])->name('ChangeUserInfo');
 	Route::post('/users/updateinfo',[UserController::class, 'update'])->name('UpdateUserLeaderInfo');
 	Route::get('/users/certificate',[UserController::class, 'certificate'])->name('ShowCertificate');
+
+	Route::post('/travel/setcomment',[TravelController::class, 'SetComment'])->name('SetComment');
+
 });
 Route::middleware(['auth','admin'])->group(function(){
 	Route::get('/leaders/active/{role}',[RoleController::class,'active'])->name('activeleader');
