@@ -210,4 +210,15 @@ class UserController extends Controller
 			return view('travels.show', ['travel' => $travel, 'message' => $message, 'number' => $number, 'leader_name' => $leader_name, 'role' => 0, 'photo_url' => $url]);
 		}
 	}
+	public function ShowUsers()
+	{
+		$users = User::all()->load('roles');
+		return view('panels.users', ['users' => $users]);
+
+	}
+	public function ShowLeaders()
+	{
+		$leaders = Role::all()->where('role', '=', 'leader')->load('user');
+		return view('panels.leaders', ['leaders' => $leaders]);
+	}
 }
