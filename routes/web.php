@@ -46,6 +46,9 @@ Route::middleware(['auth','admin'])->group(function(){
 	Route::get('/leaders/active/{role}',[RoleController::class,'active'])->name('activeleader');
 	Route::get('/leaders/unactive/{role}',[RoleController::class,'unactive'])->name('unactiveleader');	
 	Route::get('/admin/seecertificate/{user}',[UserController::class, 'AdminSeeCertificate'])->name('AdminSeeCertificate');
+	Route::get('/admin/show/users',[UserController::class,'ShowUsers'])->name('ShowUsers');
+	Route::get('/admin/show/leaders',[UserController::class,'ShowLeaders'])->name('ShowLeaders');
+
 });
 Route::get('/travels/show/{travel}' ,[TravelController::class,'show'])->name('ShowTravel');
 Route::get('/travels/index' ,[TravelController::class,'index'])->name('IndexTravel');
