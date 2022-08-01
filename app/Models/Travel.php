@@ -27,4 +27,8 @@ class Travel extends Model
 	{
 		return $this->hasMany('App\Models\Comment');
 	}
+	public function chats()
+	{
+		return $this->hasMany('App\Models\Chat');
+	}
 }
