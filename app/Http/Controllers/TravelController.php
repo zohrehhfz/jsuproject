@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Travel;
 use App\Models\Comment;
 use App\Models\User;
+use Verta;
 
 class TravelController extends Controller
 {
