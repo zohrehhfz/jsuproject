@@ -409,8 +409,17 @@ class TravelController extends Controller
 			]);
 		}
 	}
-	public function ShowChat()
+	public function ShowChat(Travel $travel)
 	{
-		 return view('travels.chat');;
+		$user = Auth::user();
+		if ($user) {
+			$user_with_travels = $user->travels;
+			$count_t = $user_with_travels->where('id', $travel->id)->count();
+			$admin = $user->roles->where('role', 'Admin')->count();
+			if (($count_t > 0) || ($admin > 0)) {
+				$chats = $travel->chats;
+				return view('travels.chat' , ["chats" => $chats , "user" => $user]);
+			}
+		}
 	}
 }
