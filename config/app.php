@@ -192,7 +192,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        'Verta' => Hekmatinasser\Verta\Verta::class
+        'Verta' => Hekmatinasser\Verta\Verta::class ,
     ])->toArray(),
 
 ];
