@@ -107,7 +107,8 @@
 							{{$user->birthdate}}
 						</p>
 						<p> حساب در تاریخ
-							{{$user->created_at}}
+							<?php $v = new Verta($user->created_at);
+							print $v->formatJalaliDate(); ?>
 							ایجاد شده است
 						</p>
 
@@ -120,10 +121,9 @@
 					<p>سفرهای شما :</p>
 					@foreach ($user->travels as $travel)
 					<div class="div1" style="margin: auto;">
-						<a href="{{route('ShowTravel',[$travel])}}"> مقصد: {{$travel->destination}}</a>
-						زمان سفر: {{$travel->traveltime}}
-
-
+						<a href="{{route('ShowTravel',[$travel])}}" style="margin-left: 35vw ;"> مقصد: {{$travel->destination}}</a>
+						زمان سفر: <?php $v= new Verta($travel->traveltime); 
+						print $v->formatJalaliDate(); ?>
 						@if($travel->cancel == 1)
 						<p style="color:red; font-size:18px;"> این سفر کنسل شده است </p>
 						@endif
