@@ -409,4 +409,8 @@ class TravelController extends Controller
 			]);
 		}
 	}
+	public function ShowChat()
+	{
+		 return view('travels.chat');;
+	}
 }
