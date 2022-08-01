@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(function(){
 	Route::get('/users/certificate',[UserController::class, 'certificate'])->name('ShowCertificate');
 
 	Route::post('/travel/setcomment',[TravelController::class, 'SetComment'])->name('SetComment');
-	Route::get('/travel/chat',[TravelController::class, 'ShowChat'])->name('ShowChat');
+	Route::get('/travel/chat/{travel}',[TravelController::class, 'ShowChat'])->name('ShowChat');
 });
 Route::middleware(['auth','admin'])->group(function(){
 	Route::get('/leaders/active/{role}',[RoleController::class,'active'])->name('activeleader');
