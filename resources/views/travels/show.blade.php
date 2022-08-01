@@ -80,9 +80,16 @@
 		<br>
 		<br>
 		<p> مقصد: {{$travel->destination}}</p>
-		<p>زمان سفر: {{$travel->traveltime}}</p>
-		<p> شروع ثبت نام: {{$travel->registerationstart}}</p>
-		<p> پایان ثبت نام : {{$travel->registerationend}}</p>
+		
+		<p>زمان سفر: <?php $v= new Verta($travel->traveltime); 
+		print $v->formatJalaliDate(); ?></p>
+
+		<p> شروع ثبت نام: <?php $v1= new Verta($travel->registerationstart); 
+		print $v1->formatJalaliDate(); ?></p>
+
+		<p> پایان ثبت نام : <?php $v2= new Verta($travel->registerationend); 
+		print $v2->formatJalaliDate(); ?></p>
+		
 		<p> توضیحات سفر : {{$travel->description}}</p>
 		<p> تعداد افراد ثبت نام کرده در این سفر : {{$number}}</p>
 		@if($leader_name != "empty")
