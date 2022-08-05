@@ -25,7 +25,7 @@ class ChatController extends Controller
 			$admin = $user->roles->where('role', 'Admin')->count();
 			if (($count_t > 0) || ($admin > 0)) {
 				$chats = $travel->chats;
-				return view('travels.chat', ["chats" => $chats, "user" => $user]);
+				return view('travels.chat', ["chats" => $chats, "user" => $user ,"travel"=>$travel]);
 			}
 		}
 	}
@@ -50,7 +50,8 @@ class ChatController extends Controller
 		$admin = $user->roles->where('role', 'Admin')->count();
 		if (($count_t > 0) || ($admin > 0)) {
 			$chats = $travel->chats;
-			return view('travels.chat', ["chats" => $chats, "user" => $user]);
+			return redirect()->route('ShowChat', ["travel"=>$travel]);
+			
 		}
 	}
 }
