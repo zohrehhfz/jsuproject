@@ -18,4 +18,9 @@ class Chat extends Model
     protected $attributes = [
         'parent_id' => NULL,
     ];
+    
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User','from');
+    }
 }
