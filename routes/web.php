@@ -51,6 +51,8 @@ Route::middleware(['auth','admin'])->group(function(){
 	Route::get('/admin/seecertificate/{user}',[UserController::class, 'AdminSeeCertificate'])->name('AdminSeeCertificate');
 	Route::get('/admin/show/users',[UserController::class,'ShowUsers'])->name('ShowUsers');
 	Route::get('/admin/show/leaders',[UserController::class,'ShowLeaders'])->name('ShowLeaders');
+	Route::get('/travel/delete/comment/{comment}',[CommentController::class, 'DeleteComment'])->name('DeleteComment');
+
 
 });
 Route::get('/travels/show/{travel}' ,[TravelController::class,'show'])->name('ShowTravel');
