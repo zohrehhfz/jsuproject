@@ -42,6 +42,8 @@ Route::middleware(['auth'])->group(function(){
 	Route::post('/travel/setcomment',[CommentController::class, 'SetComment'])->name('SetComment');
 	Route::get('/travel/chat/{travel}',[ChatController::class, 'ShowChat'])->name('ShowChat');
 	Route::post('/travel/send/message',[ChatController::class, 'SendMessage'])->name('SendMessage');
+	Route::get('/travel/delete/message/{chat}',[ChatController::class, 'DeleteMessage'])->name('DeleteMessage');
+
 });
 Route::middleware(['auth','admin'])->group(function(){
 	Route::get('/leaders/active/{role}',[RoleController::class,'active'])->name('activeleader');
