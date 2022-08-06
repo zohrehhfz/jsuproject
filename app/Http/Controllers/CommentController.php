@@ -58,4 +58,16 @@ class CommentController extends Controller
 			]);
 		}
 	}
+	public  function DeleteComment(Comment $comment)
+	{
+		$user = Auth::user();
+
+		$this_travel_id = $comment->travel_id;
+		
+		$admin = $user->roles->where('role', 'Admin')->count();
+		if ($admin > 0) {
+			$deleted = DB::table('comments')->where('id', $comment->id)->delete();
+			return redirect()->route('ShowTravel', ["travel" => $this_travel_id]);
+		}
+	}
 }
