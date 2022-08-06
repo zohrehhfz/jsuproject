@@ -27,15 +27,10 @@
                                 @if($message->from != $user->id)
                                 <li class="clearfix" style="margin-left: 20vw;">
                                     <div class="float-right" style="background-color: #A1C4E7  ; border-radius:20px; width: fit-content; margin: auto;">
-                                        <div class="float-right">
-                                            <div class="d-inline" dir="ltr">
-                                                <div class="d-inline" style="text-align: right; color:#6D7173;">
-                                                    <i style="text-align: right;"><?php $v2 = new Verta($message->created_at);
-                                                                                    print $v2->formatJalaliDate(); ?>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                                        {{$name}}</i>
+                                        <div class="d-inline" dir="rtl" style="text-align: right; color:#6D7173;">
+                                            <i style="text-align: right;">
+                                                <div style="float: right;">
 
-                                                </div>
-                                                <div class="d-inline">
                                                     <?php
                                                     if ($photo_url == "/storage/files/null") {
                                                     ?>
@@ -48,11 +43,16 @@
                                                     }
                                                     ?>
 
+                                                    {{$name}}
                                                 </div>
-                                            </div>
-                                            <div class="pl-2" style=" text-align: right;">{{$message->message}}</div>
-                                            <br>
+                                                <div class="d-inline" style="float: left;"> <?php $v2 = new Verta($message->created_at);
+                                                                                            print $v2->formatJalaliDate(); ?></div>
+                                            </i>
                                         </div>
+                                        <br> <br>
+                                        <div class="pl-2" style=" text-align: right;">{{$message->message}}</div>
+                                        <br>
+
                                         <br>
                                     </div>
                                     <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply-fill" viewBox="0 0 16 16">
@@ -62,40 +62,29 @@
                                 <br>
 
                                 @else
-                                <li class="clearfix" style="margin-right: 33vw;">
-                                    <div class="float-left" >
+                                <li class="clearfix" style="margin-right: 33vw; float:left;">
                                         <div class="float-left" style=" text-align: right; background-color:#C8DBED; border-radius:10px; width: fit-content; margin: auto;">
-                                            <div class="d-inline" dir="ltr">
-                                                <div class="d-inline" style="text-align: right; color:#6D7173;">
-                                                    <i style="text-align: right;"> {{$name}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <?php $v2 = new Verta($message->created_at);
-                                                                                                                                                            print $v2->formatJalaliDate(); ?>
+                                                <div class="d-inline" dir="rtl" style="text-align: right; color:#6D7173;">
+                                                    <i style="text-align: right;">
+                                                        <div style="float: right;">{{$name}}</div>
+                                                        <div style="float: left;"><?php $v2 = new Verta($message->created_at);
+                                                                                    print $v2->formatJalaliDate(); ?></div>
                                                     </i>
                                                 </div>
-                                                <div class="d-inline">
-                                                    <?php
-                                                    if ($photo_url == "/storage/files/null") {
-                                                    ?>
-                                                        <img src="/user.gif" class="img-fluid img-circle d-inline" style="margin-right:1vw; width:40px; height:40px;" alt="profile photo Not Set">
-                                                    <?php
-                                                    } else {
-                                                    ?>
-                                                        <img src="{{$photo_url}}" class="img-fluid img-circle d-inline" alt="Profile photo UnAvialable" style="margin-right:1vw; width:40px; height:40px;">
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </div>
+                                                <br>
                                                 <div class="pb-4" style=" text-align: right;">
                                                     {{$message->message}}
                                                 </div>
-                                            </div>
                                         </div>
                                         <div>
-                                        <a href="{{route('DeleteMessage',[ $message->id ])}}"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" style="margin-right: -14px; margin-top: -3vh; color:red;" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                            </svg></a>
-                                           
+                                            <a href="{{route('DeleteMessage',[ $message->id ])}}"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" style="margin-right: -14px; margin-top: -3vh; color:red;" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                                </svg></a>
+
                                         </div>
+                                        <br>
                                 </li>
+                                <br>
                                 <br>
                                 @endif
                                 @endforeach
