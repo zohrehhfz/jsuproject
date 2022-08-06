@@ -25,7 +25,7 @@ class ChatController extends Controller
 			$admin = $user->roles->where('role', 'Admin')->count();
 			if (($count_t > 0) || ($admin > 0)) {
 				$chats = $travel->chats;
-				return view('travels.chat', ["chats" => $chats, "user" => $user ,"travel"=>$travel]);
+				return view('travels.chat', ["chats" => $chats, "user" => $user, "travel" => $travel]);
 			}
 		}
 	}
@@ -50,8 +50,23 @@ class ChatController extends Controller
 		$admin = $user->roles->where('role', 'Admin')->count();
 		if (($count_t > 0) || ($admin > 0)) {
 			$chats = $travel->chats;
-			return redirect()->route('ShowChat', ["travel"=>$travel]);
-			
+			return redirect()->route('ShowChat', ["travel" => $travel]);
+		}
+	}
+	public function DeleteMessage(Chat $chat)
+	{
+		
+		$user = Auth::user();
+
+		$this_travel_id = $chat->travel_id;
+		
+		$user_with_travels = $user->travels;
+		$count_t = $user_with_travels->where('id', $this_travel_id)->count();
+		$travel = Travel::find($this_travel_id);
+		$admin = $user->roles->where('role', 'Admin')->count();
+		if (($count_t > 0) || ($admin > 0)) {
+			$deleted = DB::table('chats')->where('id', $chat->id)->delete();
+			return redirect()->route('ShowChat', ["travel" => $travel]);
 		}
 	}
 }
