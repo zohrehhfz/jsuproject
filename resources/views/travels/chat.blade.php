@@ -2,6 +2,7 @@
 @section('title', 'چت')
 @section('content')
 <x-app-layout>
+<button id="submitbutton" style="color:white; width:10%; display:inline; margin-right:65vw;"><a href="{{route('ShowTravel',[$travel])}}">بازگشت</a> </button>
 
     <div class="py-12" style="font-size:18px;">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
