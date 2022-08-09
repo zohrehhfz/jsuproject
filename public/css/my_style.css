@@ -508,3 +508,28 @@ hr {
     clear: both;
     height: 0;
 }
+
+footer {
+    border-radius: 20px;
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    background-color: #d7ecf0;
+    width: 95%;
+    font-size: 1.1vw;
+}
+
+.footerdiv1 {
+    text-align: center;
+    margin: 1vh 1vw 5vh 10vw;
+}
+
+.footerdiv2 {
+    text-align: center;
+    margin: 1vh 10vw 5vh 5vw;
+}
+
+#pfoot {
+    text-align: right;
+    margin-right: 2%;
+}
