@@ -122,7 +122,7 @@ class UserController extends Controller
 		));
 		$user = User::find(Auth::user()->id);
 		$url = Storage::url('public/files/' . $user->photoname);
-		return view('dashboard', ['user' => $user, 'photo_url' => $url]);
+		return redirect()->route('dashboard');
 	}
 	public function certificate()
 	{
