@@ -20,20 +20,20 @@
             <div class="mt-4">
                 <x-label for="email" :value="__('ایمیل')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required style="margin-left: 9px;"/>
+                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required style="margin-left: 16px;"/>
             </div>
 			
 			<!-- phone -->
             <div class="mt-4">
                 <x-label for="phone" :value="__('شماره تلفن')" />
 
-                <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required style="margin-left: 45px;"/>
+                <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required style="margin-left: 55px;"/>
             </div>
 			<!-- year of birth -->
             <div class="mt-4">
                 <x-label for="birthdate" :value="__('سال تولد')" />
 
-                <x-input id="birthdate" class="block mt-1 w-full" type="text" name="birthdate" :value="old('birthdate')" required style="margin-left: 20px;"/>
+                <x-input id="birthdate" class="block mt-1 w-full" type="text" name="birthdate" :value="old('birthdate')" required style="margin-left: 40px;"/>
             </div>
 				
 			<div class="mt-4">
@@ -51,7 +51,7 @@
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
-                                required autocomplete="new-password" style="margin-left: 20px;"/>
+                                required autocomplete="new-password" style="margin-left: 35px;"/>
             </div>
 
             <!-- Confirm Password -->
@@ -60,12 +60,12 @@
 
                 <x-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
-                                name="password_confirmation" required style="margin-left: 40px;"/>
+                                name="password_confirmation" required style="margin-left: 70px;"/>
             </div>
 
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
+                    {{ __('ورود به حساب') }}
                 </a>
 
                 <x-button id="submitbutton">
